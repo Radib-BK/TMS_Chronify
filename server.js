@@ -21,7 +21,7 @@ const taskSchema = new mongoose.Schema({
     dueDate: Date,
     priority: Number,
     category: String,
-    status: { type: String, default: 'pending' }, // default status
+    status: { type: String, default: 'pending' },
 });
 
 const Task = mongoose.model('Task', taskSchema);
