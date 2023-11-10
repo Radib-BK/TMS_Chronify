@@ -342,6 +342,6 @@ app.delete("/tasks/:taskId", async (req, res) => {
 //Connect to the database before listening
 connectDB().then(() => {
   app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running`);
   });
 })
