@@ -119,6 +119,7 @@
                     return response.ok ? response.text() : Promise.reject('Registration failed');
                 })
                 .then(data => {
+                    alert('Registration successful. Please login.');
                     console.log('Registration successful:', data);
                     // Handle successful registration, e.g., show a success message
                 })
