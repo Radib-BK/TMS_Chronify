@@ -156,10 +156,6 @@ app.get("/viewTasks", (req, res) => {
   res.sendFile(path.join(__dirname, "viewTasks.html"));
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
-
 app.post("/tasks/create", verifyToken, async (req, res) => {
     try {
         const newTask = new Task({
