@@ -13,6 +13,7 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(__dirname));
 
 mongoose
   .connect(process.env.MONGO_URI)
@@ -44,10 +45,10 @@ const Task = mongoose.model("Task", taskSchema);
 const User = mongoose.model("User", userSchema);
 
 app.get("/login", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "login.html"));
+  res.sendFile(path.join(__dirname, "login.html"));
 });
 
-app.use(express.static("client"));
+
 // Register route
 app.post("/register", async (req, res) => {
   try {
@@ -140,15 +141,15 @@ app.get("/", verifyToken, (req, res) => {
   if (!token) {
     return res.redirect("/login");
   }
-  res.sendFile(path.join(__dirname, "client", "index.html"));
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
 app.get("/login", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "login.html"));
+  res.sendFile(path.join(__dirname, "login.html"));
 });
 
 app.get("/viewTasks", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "viewTasks.html"));
+  res.sendFile(path.join(__dirname, "viewTasks.html"));
 });
 
 app.listen(PORT, () => {

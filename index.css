@@ -17,7 +17,7 @@ h1 {
     text-align: center;
     color: rgb(76, 0, 207);
     font-weight: 900;
-    font-size: 2.5rem;
+    font-size: 3rem;
 }
 
 .infoSubContainer {
@@ -63,6 +63,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    overflow-x: auto;
 }
 
 thead {
@@ -84,6 +85,9 @@ th {
     line-height: 1; /* Adjust the value to vertically center the text */
 }
 
+td{
+    text-align: center;
+}
 
 tbody{
     background-color: aliceblue;
@@ -199,7 +203,8 @@ button:hover {
 
 /* Add this CSS for the Action column */
 td.action-column {
-    max-width: 18.5rem;
+    text-align: center;
+    max-width: 18rem;
     min-width: 18rem;
 }
 
