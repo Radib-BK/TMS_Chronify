@@ -1,19 +1,30 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const path = require('path');
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const path = require("path");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const app = express();
 const PORT = 3000;
 
+app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('client'));
 
 mongoose
-    .connect("mongodb+srv://radibbk:weblabparina@cluster0.bvqap2y.mongodb.net/?retryWrites=true&w=majority")
-    .then(() => { console.log('Connection successful'); })
-    .catch((err) => console.log(err));
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log("Connection successful");
+  })
+  .catch((err) => console.log(err));
+
+const userSchema = new mongoose.Schema({
+  username: String,
+  password: String,
+});
 
 const taskSchema = new mongoose.Schema({
     title: String,
@@ -21,26 +32,130 @@ const taskSchema = new mongoose.Schema({
     dueDate: Date,
     priority: Number,
     category: String,
-    status: { type: String, default: 'pending' },
+    status: { type: String, default: "pending" },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
+  });
+
+const Task = mongoose.model("Task", taskSchema);
+const User = mongoose.model("User", userSchema);
+
+app.get("/login", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "login.html"));
 });
 
-const Task = mongoose.model('Task', taskSchema);
+app.use(express.static("client"));
+// Register route
+app.post("/register", async (req, res) => {
+  try {
+    const { username, password } = req.body;
 
+    // Check if username already exists
+    const existingUser = await User.findOne({ username });
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client', 'index.html'));
+    if (existingUser) {
+      return res.status(409).send("Username already exists");
+    }
+
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create a new user
+    const newUser = new User({
+      username,
+      password: hashedPassword,
+    });
+
+    console.log("New User:", newUser);
+    await newUser.save();
+    console.log("User registered successfully");
+    res.status(201).send("User registered successfully");
+  } catch (err) {
+    console.error(err);
+    // Send a more detailed error message
+    res.status(500).send(`Registration failed: ${err.message}`);
+  }
 });
 
-app.get('/viewTasks', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client', 'viewTasks.html'));
+// Login route
+app.post("/login", async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    // Find the user by username
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      return res.status(401).send("Invalid username or password");
+    }
+
+    // Check the password
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      return res.status(401).send("Invalid username or password");
+    }
+
+    const token = jwt.sign({ userId: user._id, username: user.username }, process.env.JWT_SECRET);
+    console.log("Token stored in local storage:", token);
+
+
+    return res.json({ token });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+const invalidatedTokens = [];
+
+app.get("/logout", (req, res) => {
+  // Invalidate the token
+  const token = req.header("Authorization");
+  invalidatedTokens.push(token);
+
+  // Redirect to the login page
+  res.redirect("/login");
+});
+
+const verifyToken = (req, res, next) => {
+    const token = req.header("Authorization");
+    try { 
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        console.log("Token decoded:", decoded);
+        req.user = decoded;
+        next();
+    } catch (ex) {
+        console.error("Invalid token:", token);
+        return res.redirect("/login");
+    }
+};
+
+
+app.get("/", verifyToken, (req, res) => {
+  const token = req.query.token;
+  if (!token) {
+    return res.redirect("/login");
+  }
+  res.sendFile(path.join(__dirname, "client", "index.html"));
+});
+
+app.get("/login", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "login.html"));
+});
+
+app.get("/viewTasks", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "viewTasks.html"));
 });
 
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-
-app.post('/tasks/create', async (req, res) => {
+app.post("/tasks/create", verifyToken, async (req, res) => {
     try {
         const newTask = new Task({
             title: req.body.title,
@@ -48,138 +163,173 @@ app.post('/tasks/create', async (req, res) => {
             dueDate: req.body.dueDate,
             priority: req.body.priority,
             category: req.body.category,
+            user: req.body.user,
         });
 
         await newTask.save();
         console.log("Data inserted successfully");
-        res.redirect('/');
+        res.redirect("/");
     } catch (err) {
         console.error(err);
-        res.status(500).send('Internal Server Error');
+        res.status(500).send("Internal Server Error");
     }
 });
 
-app.get('/tasks', async (req, res) => {
+// Add this route after the verifyToken middleware
+app.get("/user", verifyToken, async (req, res) => {
+  try {
+    // Retrieve user information based on the decoded token
+    const user = await User.findOne({ username: req.user.username });
+
+    if (!user) {
+      console.error("User not found");
+      return res.status(404).send("User not found");
+    }
+
+    // Return user information
+    res.json({
+      username: user.username,
+      userId: user._id,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+
+app.get("/tasks", async (req, res) => {
+  try {
+    let sortQuery = {};
+
+    if (req.query.sortBy) {
+      if (req.query.sortBy === "priority") {
+        sortQuery.priority = 1;
+      } else if (req.query.sortBy === "dueDate") {
+        sortQuery.dueDate = 1;
+      }
+    }
+
+    let filterQuery = {};
+
+    if (req.query.category) {
+      filterQuery.category = req.query.category;
+    }
+
+    if (req.query.status) {
+      filterQuery.status = req.query.status;
+    }
+
+    if (req.query.search) {
+      filterQuery.$or = [
+        { title: { $regex: new RegExp(req.query.search, "i") } },
+        { description: { $regex: new RegExp(req.query.search, "i") } },
+      ];
+    }
+    filterQuery.user = req.query.userId;
+    const tasks = await Task.find(filterQuery).sort(sortQuery);
+
+    console.log("Tasks are retrieved from the database");
+    res.json(tasks);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+app.get("/tasks/:taskId", async (req, res) => {
     try {
-        let sortQuery = {};
-
-        if (req.query.sortBy) {
-            if (req.query.sortBy === 'priority') {
-                sortQuery.priority = 1;
-            } else if (req.query.sortBy === 'dueDate') {
-                sortQuery.dueDate = 1;
-            }
-        }
-
-        let filterQuery = {};
-
-        if (req.query.category) {
-            filterQuery.category = req.query.category;
-        }
-
-        if (req.query.status) {
-            filterQuery.status = req.query.status;
-        }
-
-        if (req.query.search) {
-            filterQuery.$or = [
-                { title: { $regex: new RegExp(req.query.search, 'i') } },
-                { description: { $regex: new RegExp(req.query.search, 'i') } },
-            ];
-        }
-
-        const tasks = await Task.find(filterQuery).sort(sortQuery);
-
-        console.log("Tasks are retrieved from the database");
-        res.json(tasks);
+      const taskId = req.params.taskId;
+      // Only retrieve the task if it is associated with the logged-in user
+      const task = await Task.findOne({ _id: taskId});
+  
+      if (!task) {
+        return res.status(404).send("Task not found");
+      }
+  
+      res.json(task);
+      console.log("item retrieved");
     } catch (err) {
-        console.error(err);
-        res.status(500).send('Internal Server Error');
+      console.error(err);
+      res.status(500).send("Internal Server Error");
     }
-});
+  });
 
-app.get('/tasks/:taskId', async (req, res) => {
+  app.put("/tasks/:taskId", async (req, res) => {
     try {
-        const taskId = req.params.taskId;
-        const task = await Task.findById(taskId);
-
-        if (!task) {
-            return res.status(404).send('Task not found');
-        }
-
-        res.json(task);
-        console.log("item retrieved");
+      const taskId = req.params.taskId;
+      // Ensure the task is associated with the logged-in user
+      const task = await Task.findOne({ _id: taskId});
+  
+      if (!task) {
+        console.log("Task not found");
+        return res.status(404).send("Task not found");
+      }
+  
+      const updatedTask = {
+        title: req.body.title,
+        description: req.body.description,
+        dueDate: req.body.dueDate,
+        priority: req.body.priority,
+        category: req.body.category,
+      };
+      
+    // Update the task
+    const updatedTaskResult = await Task.findByIdAndUpdate(taskId, updatedTask, {
+        new: true,
+      });
+  
+      console.log("Task updated successfully");
+      res.json(updatedTaskResult);
     } catch (err) {
-        console.error(err);
-        res.status(500).send('Internal Server Error');
+      console.error(err);
+      res.status(500).send("Internal Server Error");
     }
 });
 
-app.put('/tasks/:taskId', async (req, res) => {
-    try {
-        const taskId = req.params.taskId;
-        const updatedTask = {
-            title: req.body.title,
-            description: req.body.description,
-            dueDate: req.body.dueDate,
-            priority: req.body.priority,
-            category: req.body.category,
-        };
+app.put("/tasks/:taskId/complete", async (req, res) => {
+  try {
+    const taskId = req.params.taskId;
 
-        const task = await Task.findByIdAndUpdate(taskId, updatedTask, { new: true });
+    const task = await Task.findOne({ _id: taskId})
 
-        if (!task) {
-            console.log('Task not found');
-            return res.status(404).send('Task not found');
-        }
-
-        console.log('Task updated successfully');
-        res.json(task);
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Internal Server Error');
+    if (!task) {
+      return res.status(404).send("Task not found");
     }
+
+    // Toggle the status between 'pending' and 'completed'
+    const newStatus = task.status === "pending" ? "completed" : "pending";
+
+    // Update the task with the new status
+    const updatedTask = await Task.findByIdAndUpdate(
+      taskId,
+      { status: newStatus },
+      { new: true }
+    );
+
+    res.json(updatedTask);
+    console.log("Item status toggled");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
-app.put('/tasks/:taskId/complete', async (req, res) => {
-    try {
-        const taskId = req.params.taskId;
+app.delete("/tasks/:taskId", async (req, res) => {
+  try {
+    const taskId = req.params.taskId;
+    const deletedTask = await Task.findOneAndDelete({ _id: taskId});
 
-        // Find the task by ID
-        const task = await Task.findById(taskId);
 
-        if (!task) {
-            return res.status(404).send('Task not found');
-        }
-
-        // Toggle the status between 'pending' and 'completed'
-        const newStatus = task.status === 'pending' ? 'completed' : 'pending';
-
-        // Update the task with the new status
-        const updatedTask = await Task.findByIdAndUpdate(taskId, { status: newStatus }, { new: true });
-
-        res.json(updatedTask);
-        console.log("Item status toggled");
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Internal Server Error');
+    if (!deletedTask) {
+      return res
+        .status(404)
+        .json({ error: "Task not found so could not delete" });
     }
+
+    res.json({ message: "Task has been deleted successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
 });
-
-
-app.delete('/tasks/:taskId', async (req, res) => {
-    try {
-        const taskId = req.params.taskId;
-        const deletedTask = await Task.findByIdAndDelete(taskId);
-
-        if (!deletedTask) {
-            return res.status(404).json({ error: 'Task not found so could not delete' });
-        }
-
-        res.json({ message: 'Task has been deleted successfully' });
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Internal Server Error');
-    }
-});
-

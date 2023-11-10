@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login/Register</title>
+        <link rel="stylesheet" type="text/css" href="css/login.css">
+    </head>
+    <body>
+        <center>
+            <div id="header">
+                <h1>ChroniFy</h1>
+                <p>Time Management System</p>
+            </div>
+            <div id="loginForm">
+                <h2>Welcome Back!</h2>
+                <form id="loginForm" onsubmit="login(event)">
+                    <label for="loginUsername">- USERNAME -</label>
+                    <input type="text" id="loginUsername" name="username" 
+                        required>
+
+                    <label for="loginPassword">- PASSWORD -</label>
+                    <input type="password" id="loginPassword" name="password"
+                        required>
+
+                    <button type="submit">Login</button>
+                </form>
+                <p>Don't have an account? <a href="#"
+                        onclick="toggleForm('registerForm')">Register</a></p>
+            </div>
+
+            <div id="registerForm" class="hidden">
+                <h2>Register Here</h2>
+                <form id="registerForm" onsubmit="register(event)" method="POST">
+                    <label for="registerUsername">Username:</label>
+                    <input type="text" id="registerUsername" name="username"
+                        required>
+
+                    <label for="registerPassword">Password:</label>
+                    <input type="password" id="registerPassword" name="password"
+                        required>
+
+                    <button type="submit">Register</button>
+                </form>
+                <p>Already have an account? <a href="#"
+                        onclick="toggleForm('loginForm')">Login</a></p>
+            </div>
+        </center>
+
+        <script>
+            
+            function toggleForm(formId) {
+                document.getElementById('loginForm').classList.toggle('hidden', formId !== 'loginForm');
+                document.getElementById('registerForm').classList.toggle('hidden', formId !== 'registerForm');
+            }
+        
+            function login(event) {
+                event.preventDefault();
+                const username = document.getElementById('loginUsername').value;
+                const password = document.getElementById('loginPassword').value;
+            
+                fetch('http://localhost:3000/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        password: password,
+                    }),
+                })
+                .then(response => {
+                    console.log('Response Status:', response.status);
+            
+                    if (!response.ok) {
+                        return response.json().then(errorData => {
+                            console.error('Server error:', errorData);
+                            return Promise.reject('Login failed');
+                        });
+                    }
+                    return response.json(); // Assuming your server sends JSON data upon successful login
+                })
+                .then(data => {
+                    console.log('Login successful:', data);
+                    // Assuming your server sends a token in the response
+                    if (data.token) {
+                        localStorage.setItem('token', data.token);
+                        window.location.href = '/';
+                    } else {
+                        console.error('Token not received from the server.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Login error:', error);
+                });
+            }
+            
+            function register(event) {
+                event.preventDefault();
+                const username = document.getElementById('registerUsername').value;
+                const password = document.getElementById('registerPassword').value;
+            
+                console.log('Registering:', { username, password });
+            
+                fetch('http://localhost:3000/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        password: password,
+                    }),
+                })
+                .then(response => {
+                    console.log('Response Status:', response.status);
+                    return response.ok ? response.text() : Promise.reject('Registration failed');
+                })
+                .then(data => {
+                    console.log('Registration successful:', data);
+                    // Handle successful registration, e.g., show a success message
+                })
+                .catch(error => {
+                    console.error('Registration error:', error);
+                    // Handle registration error, e.g., display an error message to the user
+                });
+            }
+            
+        </script>
+    </body>
+</html>

@@ -30,9 +30,7 @@ label {
 input,
 textarea,
 select {
-    min-width: 18rem;
-    max-width: 29.8rem;
-    width: 100%;
+    width: calc(100% - 24px); /* Adjusted to consider padding */
     padding: 12px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
@@ -41,14 +39,9 @@ select {
     color: #333;
     transition: border-color 0.3s ease;
 }
-select{
-    max-width: 33rem;
-}
 
-input:focus,
-textarea:focus,
-select:focus {
-    border-color: rgb(52, 52, 219);
+select {
+    max-width: 100%;
 }
 
 button {
@@ -85,6 +78,22 @@ button:hover {
     background-color: #001f7a;
 }
 
-center {
-    text-align: center;
+@media only screen and (max-width: 600px) {
+    form {
+        padding: 20px;
+    }
+
+    button,
+    #nextButton {
+        font-size: 14px;
+        margin: 0.5rem;
+        min-width: 9rem;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    button,
+    #nextButton {
+        font-size: 12px; /* Further adjust font size for even smaller screens */
+    }
 }

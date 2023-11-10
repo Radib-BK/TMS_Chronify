@@ -12,21 +12,22 @@ body {
     padding-top: 20px; /* Adjust the margin according to your design */
 }
 
-#info h1 {
+h1 {
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     text-align: center;
-    color: #ff5f08;
-    font-weight: 700;
+    color: rgb(76, 0, 207);
+    font-weight: 900;
+    font-size: 2.5rem;
 }
 
 .infoSubContainer {
     display: flex;
-    justify-content: space-between;
+    justify-content:space-evenly;
 }
 
 .infoSub {
     flex: 1;
-    max-width: 45%; /* Adjust the max-width based on your preference */
-    margin: 0 5px; /* Add some margin between the sub-info sections */
+    max-width: 45%; /* Adjust the max-width based on your preference /* Add some margin between the sub-info sections */
 }
 
 label {
@@ -40,18 +41,18 @@ label {
 
 input,
 select {
-    max-width: 35rem;
-    width: 100%;
+    width: 70%; /* Set width to 100% to make it responsive */
+    min-width: 16rem;
     padding: 12px;
     margin-bottom: 15px;
-    border: 2px solid #ccc;
+    border: 2px solid rgb(61, 0, 122);
     border-radius: 4px;
     background-color: #fff;
     color: #000;
+    background-color: rgba(242, 240, 255, 0.471);
 }
-input{
-    max-width: 33.8rem;
-}
+
+
 
 input:hover, select:hover {
     background-color: #fbf8ff;
@@ -77,6 +78,12 @@ th, td {
     font-size: medium;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
+
+th {
+    text-align: center;
+    line-height: 1; /* Adjust the value to vertically center the text */
+}
+
 
 tbody{
     background-color: aliceblue;
@@ -122,21 +129,45 @@ tbody tr:hover {
 }
 
 .back {
-    margin: 0;
-    background-color: rgb(0, 0, 182);
-    color: #eeff50;
-    float: right;
-    padding: 0.5rem 1rem;
+    position: absolute;
+    display: block;
+    margin-right: 4rem;
+    background-color: rgb(255, 251, 251);
+    color: #000000;
+    padding: 13px 15px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 2px 2px 2px rgb(255, 146, 146);
+    border-radius: .4rem;
+    right: 0; /* Set right property to 0 */
+    top: 65px;
+}
+
+.back:hover {
+    background-color: rgb(255, 255, 255);
+    color: #ffffff;
+}
+
+.addnew{
+    display: block;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    max-width: 25rem;
+    background-color: rgba(0, 0, 182, 0.717);
+    color: #ffffff;
+    padding: 0.8rem 1rem;
     font-size: 18px;
     font-weight: 600;
     cursor: pointer;
     border: #000000 1px solid;
-    border-radius: 5px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 1px rgb(208, 147, 255);
 }
 
-.back:hover {
-    background-color: rgb(0, 0, 120);
-    color: #ff0000;
+.addnew:hover {
+    background-color: rgba(0, 0, 0, 0.908);
+    color: #00ff11;
 }
 
 textarea {
@@ -151,7 +182,6 @@ textarea {
 
 button {
     background-color: #ff7f50;
-
     color: #fff;
     min-width: 7rem;
     margin: 0.2rem 1rem;
@@ -171,5 +201,104 @@ button:hover {
 td.action-column {
     max-width: 18.5rem;
     min-width: 18rem;
+}
+
+span ~ p{
+    position: fixed;
+    bottom: 0px;
+    right: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    color: rgba(186, 186, 186, 0.216);
+    font-size: 10px;
+}
+
+@media only screen and (max-width: 750px) {
+    body {
+        margin: 0rem 0.5rem;
+        padding: 2rem 0.5rem;
+    }
+    
+    .back {
+        padding: 0.6rem .8rem;
+        font-size: 16px;
+        border-radius: 6px;
+    }
+    
+    #info {
+        padding-top: 1px;
+    }
+    label{
+        font-size: 14px;
+    }
+    
+    .infoSubContainer {
+        flex-direction: row;
+        align-items:normal;
+        justify-content: center;
+    }
+    
+    .infoSub {
+        max-width: 100%;
+        margin: 5px 0;
+    }
+    
+    input,
+    select {
+        min-width: 9rem;
+        font-size: 12px;
+        max-width: 18rem;
+        margin-bottom: 0px;
+        height: min-content;
+    }
+    
+    .modal-content {
+        min-width: 80%; /* Adjusted the width for smaller screens */
+        max-width: 100%;
+        padding: 20px;
+    }
+    
+    .back {
+        margin-right: 0;
+        top: 32px;
+        right: 16px;
+    }
+    
+    .addnew {
+        max-width: 90%;
+        margin-top: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    button {
+        margin: 0.2rem 0.1rem;
+        font-size: 12px;
+        padding: 8px 14px; /* More padding */
+        min-width: 6rem;
+    }
+    
+    /* Adjust table layout for small screens */
+    table {
+        display: block;
+        overflow-x: auto;
+        z-index: 5;
+    }
+    
+    th, td {
+        min-width: 1rem;
+        font-size: small;
+        vertical-align: middle;
+    }
+
+    /* Add this CSS for the Action column */
+td.action-column {
+    max-width: 13rem;
+    min-width: 13rem;
+}
+
+center {
+    display: block;
+    z-index: -1;
+}
+
 }
 
