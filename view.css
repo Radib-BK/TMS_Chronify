@@ -3,14 +3,23 @@ body {
     background-color: #f0f0f0;
     color: #333;
     margin: 10px;
-    padding: 10px;
+    padding: 0px;
 }
 
 h1 {
     text-align: center;
-    color: #ff5f08;
+    color: rgb(3, 0, 158);
     font-weight: 700;
+    padding-top: 0rem;
 }
+
+
+#userinfo {
+    font-family:'Courier New', Courier, monospace;
+    text-align: center;
+    margin-top: 2px;
+}
+
 
 form {
     max-width: 500px;
@@ -44,6 +53,11 @@ select {
     max-width: 100%;
 }
 
+textarea:hover, input:hover, select:hover {
+    background-color: #fbf8ff;
+    border-color: rgb(52, 52, 219);
+}
+
 button {
     background-color: #40ff39;
     box-shadow: 2px 3px 1px rgb(255, 250, 92);
@@ -60,6 +74,10 @@ button {
 
 button:hover {
     background-color: rgb(0, 218, 33);
+}
+
+select{
+    width: 100%;
 }
 
 #nextButton {
@@ -89,11 +107,32 @@ button:hover {
         margin: 0.5rem;
         min-width: 9rem;
     }
+
+    #userinfo::before,
+    #userinfo::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 92%;
+    background-color: rgb(220, 217, 255); /* Light blue underline */
+    margin: 15px auto;
+    }
+
+    #userinfo::before {
+    margin-right: 10px;
+    }
+
+    #userinfo::after {
+    margin-left: 20px;
+    }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 450px) {
     button,
     #nextButton {
         font-size: 12px; /* Further adjust font size for even smaller screens */
+    }
+    h1{
+        padding-top: 2rem;
     }
 }

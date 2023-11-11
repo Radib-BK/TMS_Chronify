@@ -79,6 +79,9 @@ function DisplayTheTasks(tasks) {
     );
 
     const row = document.createElement("tr");
+    if (task.status === "completed") {
+      row.classList.add("completed-task");
+    }
     row.innerHTML = `
             <td>${task.title}</td>
             <td>${task.description}</td>

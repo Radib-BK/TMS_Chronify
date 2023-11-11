@@ -52,6 +52,10 @@ select {
     background-color: rgba(242, 240, 255, 0.471);
 }
 
+select {
+    width: 75%;
+}
+
 
 
 input:hover, select:hover {
@@ -60,6 +64,9 @@ input:hover, select:hover {
 }
 
 table {
+    display:flexbox;
+    align-items: center;
+    text-align: center;
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
@@ -90,7 +97,7 @@ td{
 }
 
 tbody{
-    background-color: aliceblue;
+    background-color: rgba(240, 252, 255, 0.365);
 }
 
 tbody tr:hover {
@@ -136,13 +143,13 @@ tbody tr:hover {
     position: absolute;
     display: block;
     margin-right: 4rem;
-    background-color: rgb(255, 251, 251);
+    background-color: rgba(255, 248, 248, 0.953);
     color: #000000;
     padding: 13px 15px;
     font-size: 18px;
     font-weight: 600;
     cursor: pointer;
-    box-shadow: 2px 2px 2px rgb(255, 146, 146);
+    box-shadow: 2px 2px 2px rgb(255, 145, 145);
     border-radius: .4rem;
     right: 0; /* Set right property to 0 */
     top: 65px;
@@ -172,6 +179,10 @@ tbody tr:hover {
 .addnew:hover {
     background-color: rgba(0, 0, 0, 0.908);
     color: #00ff11;
+}
+
+.completed-task {
+    background-color: #48ff4817;
 }
 
 textarea {
@@ -206,8 +217,8 @@ button:hover {
 /* Add this CSS for the Action column */
 td.action-column {
     text-align: center;
-    max-width: 18rem;
-    min-width: 18rem;
+    min-width: 20rem;
+    max-width: 24rem;
 }
 
 span ~ p{
@@ -219,10 +230,17 @@ span ~ p{
     font-size: 10px;
 }
 
+@media only screen and (max-width: 1086px) {
+    table{
+        display: block;
+    }
+}
+
+
 @media only screen and (max-width: 750px) {
     body {
         margin: 0rem 0.5rem;
-        padding: 2rem 0.5rem;
+        padding: 1rem 0.5rem;
     }
     
     .back {
@@ -259,14 +277,14 @@ span ~ p{
     }
     
     .modal-content {
-        min-width: 80%; /* Adjusted the width for smaller screens */
+        min-width: 80%;
         max-width: 100%;
         padding: 20px;
     }
     
     .back {
         margin-right: 0;
-        top: 32px;
+        top: 15px;
         right: 16px;
     }
     
