@@ -302,7 +302,7 @@ select {
     }
 
     h2{
-        margin-top: 30%;
+        margin-top: 25%;
     }
     body {
         margin: 0rem 0.5rem;
@@ -312,8 +312,8 @@ select {
     #noTaskImg{
         height : 30%; 
         width : 30%;
-        margin-left : 3.2%;
-        margin-bottom: 70%;
+        margin-left : 8.6%;
+        margin-bottom: 72%;
     }
 
     .back {
