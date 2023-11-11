@@ -161,7 +161,7 @@ function DetailsShow(taskId) {
                   <p><strong>Title:</strong> ${task.title}</p>
                   <p><strong>Description:</strong> ${task.description}</p>
                   <p><strong>Due Date:</strong> ${task.dueDate}</p>
-                  <p><strong>Priority:</strong> ${task.priority}</p>
+                  <p><strong>Priority:</strong> ${mapPriorityValueToLabel(task.priority)}</p>
                   <p><strong>Category:</strong> ${task.category}</p>
                   <p><strong>Status:</strong> ${task.status}</p>
                   <center>

@@ -261,7 +261,6 @@ select {
     border-color: #f47703;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   }
-  
 
 @media only screen and (max-width: 1140px) {
     td.action-column {
@@ -383,6 +382,13 @@ select {
 
     .infoSubContainer > .infoSub {
         width: calc(33.33% - 10px);
+    }
+
+    input[type="date"]
+    {
+        display:block;
+        -webkit-appearance: textfield;
+        -moz-appearance: textfield;
     }
 }
 
