@@ -1,9 +1,9 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f0f0f0;
+    background: linear-gradient(to bottom, #f9f8ff, #f8f4ff);
     color: #333;
-    margin: 2rem;
-    padding: 2rem;
+    margin: 0rem 1rem 1rem;
+    padding: 1rem;
 }
 
 #info {
@@ -144,42 +144,42 @@ tbody tr:hover {
 .back {
     position: absolute;
     display: block;
-    margin-right: 4.5rem;
+    margin-right: 2.6rem;
     color: #000000;
     padding: 9px 9px 4px;
     font-size: 18px;
     font-weight: 600;
     cursor: pointer;
-    border-radius: .4rem;
+    border-radius: 1rem;
     right: 0;
-    top: 69px;
+    top: 25px;
     background-color: rgba(255, 248, 248, 0.953);
     box-shadow: 2px 2px 0px rgb(255, 145, 145);
 }
 
 .back:hover {
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(255, 230, 230);
     color: #ffffff;
 }
 
 .addnew{
     position: absolute;
     display: block;
-    margin-left: 4.3rem;
+    margin-left: 2.5rem;
     color: #000000;
     padding: 9px 9px 4px;
     font-size: 18px;
     font-weight: 600;
     cursor: pointer;
-    border-radius: .4rem;
+    border-radius: 1rem;
     left: 0;
-    top: 69px;
+    top: 25px;
     background-color: rgba(241, 248, 255, 0.717);
     box-shadow: 2px 2px 0px rgb(147, 176, 255);
 }
 
 .addnew:hover {
-    background-color: #00ff114f;
+    background-color: #43ff504f;
     color: #000b01;
 }
 
@@ -239,7 +239,6 @@ select {
     padding: 8px;
     font-size: 14px;
     border-radius: 5px;
-    background-color: #f5f5f5;
     color: #000000;
     outline: none;
     cursor: pointer;
@@ -254,7 +253,7 @@ select {
   
   /* Hover effect for the options */
   select:hover, select option:hover {
-    background-color: #fffff6;
+    background-color: #ffffff;
     color: #000000;
   }
   
@@ -293,7 +292,7 @@ select {
     .back {
         margin-right: 0;
         padding: 5px 6px 0.5px;
-        border-radius: 6px;
+        border-radius: 1rem;
         top: 18px;
         right: 21px;
         box-shadow: 2px 2px 1px rgb(255, 145, 145);
@@ -302,7 +301,7 @@ select {
     .addnew{
         margin-left: 0;
         padding: 5px 6px 0.5px;
-        border-radius: .4rem;
+        border-radius: 0.8rem;
         left: 18px;
         top: 18px;
     }
