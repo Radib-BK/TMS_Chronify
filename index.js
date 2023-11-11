@@ -62,26 +62,25 @@ app.post("/register", async (req, res) => {
     const existingUser = await User.findOne({ username });
 
     if (existingUser) {
-      alert("Username already exists");
       return res.status(409).send("Username already exists");
     }
 
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
-
+    
     // Create a new user
     const newUser = new User({
       username,
       password: hashedPassword,
     });
-
+    
     console.log("New User:", newUser);
     await newUser.save();
     console.log("User registered successfully");
     res.status(201).send("User registered successfully");
   } catch (err) {
     console.error(err);
-    // Send a more detailed error message
+    alert("Username already exists");
     res.status(500).send(`Registration failed: ${err.message}`);
   }
 });
