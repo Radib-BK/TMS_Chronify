@@ -100,7 +100,7 @@ th, td {
     margin-bottom: 4.5rem;
 }
 
-h2{
+#noTask > h2{
     margin-top: 2rem;
     font-size: 2rem;
     font-weight: 600;
@@ -119,11 +119,6 @@ td{
 
 tbody{
     background-color: rgba(240, 252, 255, 0.365);
-}
-
-tbody tr:hover {
-    background-color: rgba(246, 243, 255, 0.724);
-    transition: all 0.3s ease;
 }
 
 .modal {
@@ -214,6 +209,10 @@ tbody tr:hover {
 
 .completed-task {
     background-color: #48ff4817;
+    color: #000;
+    transition: background-color 1.3s, color 1.3s;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -301,7 +300,7 @@ select {
         margin-bottom: 0.2rem;
     }
 
-    h2{
+    #noTask > h2{
         margin-top: 25%;
     }
     body {
