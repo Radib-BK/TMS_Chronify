@@ -234,13 +234,13 @@ button:hover {
 }
 
 /* Add this CSS for the Action column */
-td.action-column {
+/* td.action-column {
     text-align: center;
-    min-width: 15.5rem;
-    max-width: 15.5rem;
-}
+    min-width: 18.5rem;
+    max-width: 18.5rem;
+} */
 
-table ~ p{
+#watermark{
     position: fixed;
     bottom: 0px;
     right: 20px;
@@ -248,6 +248,14 @@ table ~ p{
     color: rgba(165, 165, 165, 0.164);
     font-size: 11px;
 }
+
+#table-container {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
 
 select {
     appearance: none;
