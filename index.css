@@ -236,6 +236,9 @@ span ~ p{
 
 
 @media only screen and (max-width: 750px) {
+    h1{
+        margin-bottom: 0.2rem;
+    }
     body {
         margin: 0rem 0.5rem;
         padding: 1rem 0.5rem;
@@ -254,29 +257,12 @@ span ~ p{
         font-size: 14px;
     }
     
-    .infoSubContainer {
-        flex-direction: row;
-        align-items:normal;
-        justify-content: center;
-    }
-    
-    .infoSub {
-        max-width: 100%;
-        margin: 5px 0;
-    }
-    
     input,
     select {
-        min-width: 9rem;
+        min-width: 7.5rem;
         font-size: 12px;
         max-width: 18rem;
         margin-bottom: 0px;
-    }
-    input{
-        height: 16px;
-    };
-    select{
-        height: 20px;
     }
     
     .modal-content {
@@ -318,15 +304,34 @@ span ~ p{
     }
 
     /* Add this CSS for the Action column */
-td.action-column {
-    max-width: 13rem;
-    min-width: 13rem;
+    td.action-column {
+        max-width: 13rem;
+        min-width: 13rem;
+    }
+
+    center {
+        display: block;
+        z-index: -1;
+    }
+    .infoSubContainer {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .infoSub {
+        max-width: 100%;
+        margin: 5px 0;
+    }
+
+    input {
+        max-width: 100%;
+        margin-bottom: 10px; /* Adjust the margin as needed */
+    }
+
+    .infoSubContainer > .infoSub {
+        width: calc(33.33% - 10px); /* Adjust the width and margin as needed */
+        margin-right: 10px; /* Adjust the margin as needed */
+    }
 }
 
-center {
-    display: block;
-    z-index: -1;
-}
-
-}
 
