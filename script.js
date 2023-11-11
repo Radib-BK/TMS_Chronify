@@ -132,9 +132,9 @@ function DisplayTheTasks(tasks) {
             <td>${task.title}</td>
             <td>${task.description}</td>
             <td>${formattedDueDate}</td>
+            <td>${statusIcon}</td>
             <td>${mapPriorityValueToLabel(task.priority)}</td>
             <td>${task.category}</td>
-            <td>${statusIcon}</td>
             <td class="action-column">
             <button onclick="ChangeToCompleted('${task._id}')">Complete</button>
                 <button onclick="DetailsShow('${task._id}')">Details</button>
