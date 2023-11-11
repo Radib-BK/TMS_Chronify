@@ -198,6 +198,15 @@ app.get("/user", verifyToken, async (req, res) => {
   }
 });
 
+app.get("/categories", verifyToken, async (req, res) => {
+  try {
+    const categories = await Task.distinct("category", { user: req.user.userId });
+    res.json(categories);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
+});
 
 app.get("/tasks", async (req, res) => {
   try {

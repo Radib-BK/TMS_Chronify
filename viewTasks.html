@@ -60,6 +60,10 @@
             }
         };
         
+        function formatCategory(rawCategory) {
+            return rawCategory.charAt(0).toUpperCase() + rawCategory.slice(1).toLowerCase();
+        }
+
         async function createNewTask(event) {
             event.preventDefault();
             const form = event.target;
@@ -73,7 +77,7 @@
             const description = document.getElementById('description').value;
             const dueDate = document.getElementById('dueDate').value;
             const priority = document.getElementById('priority').value;
-            const category = document.getElementById('category').value;
+            const category = formatCategory(document.getElementById('category').value);
         
             try {
                 const userId = userInfo.userId;

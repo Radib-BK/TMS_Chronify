@@ -1,44 +1,84 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const token = localStorage.getItem("token");
-  console.log("Token retrieved from localStorage:", token);
   if (!token) {
-    window.location.href = "/login";
+      window.location.href = "/login";
   }
+
+  await fetchAndPopulateCategories(token);
+
+  const categoryFilter = document.getElementById("categoryFilter");
+  categoryFilter.addEventListener("change", FetchToDisplayTheTasks);
+
   FetchToDisplayTheTasks();
 });
 
+async function fetchAndPopulateCategories(token) {
+  try {
+      const categoriesResponse = await fetch('/categories', {
+          headers: {
+              'Authorization': `${token}`,
+          },
+      });
+
+      if (!categoriesResponse.ok) {
+          throw new Error(`Categories request failed with status ${categoriesResponse.status}`);
+      }
+
+      const categoriesData = await categoriesResponse.json();
+
+      const categoryFilterSelect = document.getElementById('categoryFilter');
+      categoryFilterSelect.innerHTML = '<option value="">All</option>';
+
+      categoriesData.forEach(category => {
+          const option = document.createElement('option');
+          option.value = category;
+          option.textContent = category;
+          categoryFilterSelect.appendChild(option);
+      });
+  } catch (error) {
+      console.error('Error fetching categories:', error);
+  }
+}
+
 async function FetchToDisplayTheTasks() {
   const token = localStorage.getItem("token");
-  const category = document.getElementById("categoryFilter").value;
-  const sortOption = document.getElementById("sortOption").value;
-  const search = document.getElementById("searchInput").value;
-  const status = document.getElementById("statusFilter").value;
+  try {
+      const category = document.getElementById("categoryFilter").value;
+      const sortOption = document.getElementById("sortOption").value;
+      const search = document.getElementById("searchInput").value;
+      const status = document.getElementById("statusFilter").value;
 
-  const userInfo = await fetch('/user', {
-    method: 'GET',
-    headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `${token}`,
-    },
-  })
-  .then(response => response.json())
-  .catch(error => {
-    console.error('User information fetch error:', error);
-    return {};
-  });
-  userId = userInfo.userId;
+      const userInfo = await fetch('/user', {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `${token}`,
+          },
+      })
+          .then(response => response.json())
+          .catch(error => {
+              console.error('User information fetch error:', error);
+              return {};
+          });
 
-  const apiUrl = `/tasks?sortBy=${sortOption}&category=${category}&status=${status}&search=${search}&userId=${userId}`;
+      const userId = userInfo.userId;
 
-  fetch(apiUrl, {
-    headers: {
-      Authorization: `${token}`,
-    },
-  })
-    .then((response) => response.json())
-    .then((tasks) => DisplayTheTasks(tasks))
-    .catch((error) => console.error(error));
+      const apiUrl = `/tasks?sortBy=${sortOption}&category=${category}&status=${status}&search=${search}&userId=${userId}`;
+
+      fetch(apiUrl, {
+          headers: {
+              Authorization: `${token}`,
+          },
+      })
+          .then((response) => response.json())
+          .then((tasks) => DisplayTheTasks(tasks))
+          .catch((error) => console.error(error));
+
+  } catch (error) {
+      console.error('Error fetching tasks:', error);
+  }
 }
+
 
 function logout() {
   localStorage.removeItem("token");

@@ -20,9 +20,9 @@
                 <div class="infoSubContainer">
                     <div class="infoSub">
                         <label for="categoryFilter">Category</label>
-                        <input type="text" id="categoryFilter"
-                            onchange="FetchToDisplayTheTasks()">
+                        <select id="categoryFilter"></select>
                     </div>
+                    
                     <div class="infoSub">
                         <label for="searchInput">Search</label>
                         <input type="text" id="searchInput"
@@ -81,24 +81,27 @@
             </div>
         </div>
 
+
         <div id="editModal" class="modal" style="display: none;">
             <div class="modal-content">
                 <span class="close" onclick="CloseEditWindow()">&times;</span>
                 <h2>Edit Task</h2>
-                <div id="editFormContent">
-                    <input type="hidden" id="editTaskId">
+                <center>
 
-                    <label for="editTitle">Title:</label>
-                    <input type="text" id="editTitle">
+                    <div id="editFormContent">
+                        <input type="hidden" id="editTaskId">
 
-                    <label for="editDescription">Description:</label>
-                    <textarea id="editDescription"></textarea>
-
-                    <label for="editDueDate">Due Date:</label>
-                    <input type="date" id="editDueDate">
-
-                    <label for="editPriority">Priority:</label>
-                    <select id="editPriority">
+                        <label for="editTitle">Title:</label>
+                        <input type="text" id="editTitle">
+                        
+                        <label for="editDescription">Description:</label>
+                        <textarea id="editDescription"></textarea>
+                        
+                        <label for="editDueDate">Due Date:</label>
+                        <input type="date" id="editDueDate">
+                        
+                        <label for="editPriority">Priority:</label>
+                        <select id="editPriority">
                         <option value="1">High</option>
                         <option value="2">Medium</option>
                         <option value="3">Low</option>
@@ -107,14 +110,14 @@
                     <label for="editCategory">Category:</label>
                     <input type="text" id="editCategory">
                     <div>
-                        <center>
-                            <button onclick="SubmitEditForm()">Save</button>
-                        </center>
+                        <button onclick="SubmitEditForm()">Save</button>
                     </div>
+                </center>
                 </div>
             </div>
         </div>
 
         <script src="./script.js"></script>
     </body>
-</html>
+    </html>
+    

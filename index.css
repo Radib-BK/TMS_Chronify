@@ -39,6 +39,7 @@ label {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+textarea,
 input,
 select {
     width: 70%; /* Set width to 100% to make it responsive */
@@ -185,17 +186,6 @@ tbody tr:hover {
     background-color: #48ff4817;
 }
 
-textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #fff;
-    color: #333;
-    
-    border: 2px solid rgb(61, 0, 122);
-}
 
 button {
     background-color: #ff7f50;
@@ -217,8 +207,8 @@ button:hover {
 /* Add this CSS for the Action column */
 td.action-column {
     text-align: center;
-    min-width: 20rem;
-    max-width: 24rem;
+    min-width: 15.5rem;
+    max-width: 15.5rem;
 }
 
 span ~ p{
@@ -230,7 +220,15 @@ span ~ p{
     font-size: 10px;
 }
 
-@media only screen and (max-width: 1086px) {
+@media only screen and (max-width: 1140px) {
+    td.action-column {
+        text-align: center;
+        min-width: 18.5rem;
+        max-width: 18.5rem;
+    }
+}
+
+@media only screen and (max-width: 1067px) {
     table{
         display: block;
     }
@@ -273,7 +271,12 @@ span ~ p{
         font-size: 12px;
         max-width: 18rem;
         margin-bottom: 0px;
-        height: min-content;
+    }
+    input{
+        height: 16px;
+    };
+    select{
+        height: 20px;
     }
     
     .modal-content {
