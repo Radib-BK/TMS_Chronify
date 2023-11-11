@@ -12,8 +12,12 @@
     <body>
         <center>
             <div id="info">
+                <span class="addnew" onclick="GoBack()">
+                    <img id="addnew-img" src="https://img.icons8.com/fluency/48/add-to-clipboard.png" alt="add-to-clipboard"/>
+                </span>
+
                 <span class="back" onclick="logout()">
-                    <i class="fa-solid fa-power-off" style="color: #ff0000;"></i>
+                    <img id="back-img" src="https://img.icons8.com/fluency/48/shutdown.png" alt="shutdown"/>
                 </span>
 
                 <h1>ChroniFy</h1>
@@ -67,10 +71,7 @@
 
                 </tbody>
             </table>
-            <center>
-                <span class="addnew" onclick="GoBack()">CREATE NEW TASK</span>
-                <p>@radib_bk</p>
-            </center>
+            <p>@radib_bk</p>
         </center>
 
         <div id="taskDetailsModal" class="modal">
