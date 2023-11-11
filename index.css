@@ -383,7 +383,6 @@ select {
 
     .infoSubContainer > .infoSub {
         width: calc(33.33% - 10px);
-        margin-right: 10px;
     }
 }
 
