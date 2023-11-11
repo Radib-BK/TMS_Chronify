@@ -104,6 +104,14 @@ function mapPriorityValueToLabel(value) {
 }
 
 function DisplayTheTasks(tasks) {
+  if(tasks.length === 0) {
+    const table = document.getElementById("taskTable");
+    table.style.display = "none";
+    const noDiv = document.getElementById("noTask");
+    noDiv.innerHTML = "<h2>No tasks found</h2> <br> <img id='noTaskImg' src='https://cdn-icons-png.flaticon.com/512/5058/5058432.png'>";
+    //viewTasks.innerHTML = "<tr><td colspan='4'>No tasks found</td> <td colspan='3'><img height = '40px' width= '40px' src='https://cdn-icons-png.flaticon.com/512/5058/5058432.png'</td></tr>";
+    return;
+  }
   const viewTasks = document.getElementById("viewTasks");
   viewTasks.innerHTML = "";
 
