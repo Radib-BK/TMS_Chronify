@@ -234,7 +234,7 @@ table ~ p{
 select {
     appearance: none;
     -webkit-appearance: none;
-    padding: 8px 2px;
+    padding: 8px 6px;
     font-size: 14px;
     border-radius: 5px;
     color: #000000;
@@ -323,7 +323,7 @@ select {
     
     input,
     select {
-        min-width: 6rem;
+        min-width: 7rem;
         font-size: 12px;
         max-width: 16rem;
         margin-bottom: 0px;
