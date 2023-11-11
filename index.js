@@ -62,6 +62,7 @@ app.post("/register", async (req, res) => {
     const existingUser = await User.findOne({ username });
 
     if (existingUser) {
+      alert("Username already exists");
       return res.status(409).send("Username already exists");
     }
 
