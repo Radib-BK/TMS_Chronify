@@ -117,10 +117,16 @@ function DisplayTheTasks(tasks) {
         year: "numeric",
       }
     );
-
+    
+    var statusIcon;
     const row = document.createElement("tr");
     if (task.status === "completed") {
+      statusIcon = "<img width='36' height='36' src='https://img.icons8.com/color/48/checked-checkbox.png' alt='checked-checkbox'/>"
       row.classList.add("completed-task");
+    }
+    else
+    {
+      statusIcon = "<img width='36' height='36' src='https://img.icons8.com/nolan/64/hourglass.png' alt='hourglass'/>"
     }
     row.innerHTML = `
             <td>${task.title}</td>
@@ -128,7 +134,7 @@ function DisplayTheTasks(tasks) {
             <td>${formattedDueDate}</td>
             <td>${mapPriorityValueToLabel(task.priority)}</td>
             <td>${task.category}</td>
-            <td>${task.status}</td>
+            <td>${statusIcon}</td>
             <td class="action-column">
             <button onclick="ChangeToCompleted('${task._id}')">Complete</button>
                 <button onclick="DetailsShow('${task._id}')">Details</button>

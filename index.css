@@ -9,7 +9,8 @@ body {
 #info {
     background-color: #ffffff90;
     text-align: center;
-    padding-top: 20px; /* Adjust the margin according to your design */
+    padding-top: 20px;
+    border-radius: .4rem;
 }
 
 h1 {
@@ -143,15 +144,15 @@ tbody tr:hover {
 .back {
     position: absolute;
     display: block;
-    margin-right: 4rem;
+    margin-right: 4.5rem;
     color: #000000;
-    padding: 8px 10px;
+    padding: 9px 9px 4px;
     font-size: 18px;
     font-weight: 600;
     cursor: pointer;
     border-radius: .4rem;
     right: 0;
-    top: 65px;
+    top: 69px;
     background-color: rgba(255, 248, 248, 0.953);
     box-shadow: 2px 2px 0px rgb(255, 145, 145);
 }
@@ -164,15 +165,15 @@ tbody tr:hover {
 .addnew{
     position: absolute;
     display: block;
-    margin-left: 4rem;
+    margin-left: 4.3rem;
     color: #000000;
-    padding: 8px 10px;
+    padding: 9px 9px 4px;
     font-size: 18px;
     font-weight: 600;
     cursor: pointer;
     border-radius: .4rem;
     left: 0;
-    top: 65px;
+    top: 69px;
     background-color: rgba(241, 241, 255, 0.717);
     box-shadow: 2px 2px 0px rgb(208, 147, 255);
 }
@@ -184,7 +185,7 @@ tbody tr:hover {
 
 #addnew-img{
     width: 48px;
-    height: 46px;
+    height: 48px;
 }
 
 #back-img{
@@ -230,6 +231,41 @@ table ~ p{
     font-size: 11px;
 }
 
+/* Style for the select element */
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+    color: #000000;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  select option {
+    background-color: #ffffff;
+    color: #000000;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  /* Hover effect for the options */
+  select:hover, select option:hover {
+    background-color: #fffff6;
+    color: #000000;
+  }
+  
+  select:focus {
+    background-color: #faefe0;
+    color: #333;
+    border-color: #f47703;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+
 @media only screen and (max-width: 1140px) {
     td.action-column {
         text-align: center;
@@ -245,7 +281,7 @@ table ~ p{
 }
 
 
-@media only screen and (max-width: 910px) {
+@media only screen and (max-width: 900px) {
     h1{
         margin-bottom: 0.2rem;
     }
@@ -255,24 +291,26 @@ table ~ p{
     }
     
     .back {
-        padding: 0.2rem 0.3rem;
-        border-radius: 6px;
         margin-right: 0;
-        top: 15px;
-        right: 16px;
+        padding: 5px 6px 0.5px;
+        border-radius: 6px;
+        top: 18px;
+        right: 21px;
+        box-shadow: 2px 2px 1px rgb(255, 145, 145);
     }
     
     .addnew{
         margin-left: 0;
-        padding: 4px 5px;
+        padding: 5px 6px 0.5px;
         border-radius: .4rem;
-        left: 15px;
-        top: 15px;
+        left: 18px;
+        top: 18px;
+        box-shadow: 2px 2px 1px rgb(208, 147, 255);
     }
 
     #addnew-img{
         width: 38px;
-        height: 36px;
+        height: 37px;
     }
     
     #back-img{
