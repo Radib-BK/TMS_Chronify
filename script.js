@@ -139,13 +139,16 @@ function DisplayTheTasks(tasks) {
     );
     const remainingDays = calculateRemainingDays(task.dueDate);
     var statusIcon;
+    var statusButton;
     const row = document.createElement("tr");
     if (task.status === "completed") {
       statusIcon = "<img width='36' height='36' src='https://img.icons8.com/color/48/checked-checkbox.png' alt='checked-checkbox'/>"
+      statusButton = "Not Done"
       row.classList.add("completed-task");
     }
     else
     {
+      statusButton = "Complete"
       statusIcon = "<img width='36' height='36' src='https://img.icons8.com/nolan/64/hourglass.png' alt='hourglass'/>"
     }
     row.innerHTML = `
@@ -156,7 +159,7 @@ function DisplayTheTasks(tasks) {
             <td>${mapPriorityValueToLabel(task.priority)}</td>
             <td>${task.category}</td>
             <td class="action-column">
-            <button onclick="ChangeToCompleted('${task._id}')">Complete</button>
+            <button onclick="ChangeToCompleted('${task._id}')">${statusButton}</button>
                 <button onclick="DetailsShow('${task._id}')">Details</button>
                 <button onclick="EditTask('${task._id}')">Edit</button>
                 <button onclick="RemoveTasks('${task._id}')">Delete</button>
