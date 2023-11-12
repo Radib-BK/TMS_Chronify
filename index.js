@@ -150,8 +150,7 @@ app.post("/reset-password", async (req, res) => {
     user.resetPasswordToken = undefined;
     user.resetPasswordExpires = undefined;
     await user.save();
-
-    res.status(200).send("Password reset successfully");
+    res.status(200).json({ message: "Password reset successfully" });
   } catch (err) {
     console.error(err);
     res.status(500).send("Internal Server Error");
