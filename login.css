@@ -11,6 +11,12 @@ body {
   background: linear-gradient(to bottom, #f9f8ff, #f8f4ff);
   touch-action: pan-y;
   user-select: text;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
 }
 
 
