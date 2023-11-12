@@ -205,10 +205,11 @@ a{
 
 a:hover {
   text-decoration: underline;
+  color: #ea00ff;
 }
 
 a:active {
-  color: #ea00ff;
+  color: #13b0ff;
 }
 
 
