@@ -158,7 +158,7 @@ function DisplayTheTasks(tasks) {
     }
     row.innerHTML = `
             <td>${task.title}</td>
-            <td>${task.description}</td>
+            <td class="desc-data">${task.description}</td>
             <td>${formattedDueDate}<br>${remainingDays}</td>
             <td>${statusIcon}</td>
             <td>${mapPriorityValueToLabel(task.priority)}</td>

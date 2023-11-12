@@ -258,6 +258,10 @@ td.action-column {
     max-width: 18.5rem;
 }
 
+td.desc-data {
+    min-width: 20rem;
+}
+
 #watermark{
     position: fixed;
     bottom: 0px;
@@ -312,6 +316,9 @@ select {
         text-align: center;
         min-width: 18.5rem;
         max-width: 18.5rem;
+    }
+    td.desc-data {
+        min-width: 8.5rem;
     }
 }
 
@@ -444,6 +451,10 @@ select {
 
     .infoSubContainer > .infoSub {
         width: calc(33.33% - 10px);
+    }
+
+    .desc-data{
+        min-width: 8.5rem;
     }
 
     input[type="date"]
