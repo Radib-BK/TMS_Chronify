@@ -90,6 +90,14 @@ function GoBack() {
   window.location.href = "/viewTasks";
 }
 
+function calculateRemainingDays(dueDate) {
+  const now = new Date();
+  const due = new Date(dueDate);
+  const timeDiff = due - now;
+  const daysRemaining = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+  return daysRemaining + 1;
+}
+
 function mapPriorityValueToLabel(value) {
   switch (value) {
     case 1:
@@ -129,7 +137,7 @@ function DisplayTheTasks(tasks) {
         year: "numeric",
       }
     );
-    
+    const remainingDays = calculateRemainingDays(task.dueDate);
     var statusIcon;
     const row = document.createElement("tr");
     if (task.status === "completed") {
@@ -143,7 +151,7 @@ function DisplayTheTasks(tasks) {
     row.innerHTML = `
             <td>${task.title}</td>
             <td>${task.description}</td>
-            <td>${formattedDueDate}</td>
+            <td>${formattedDueDate}<br>${remainingDays} day(s)</td>
             <td>${statusIcon}</td>
             <td>${mapPriorityValueToLabel(task.priority)}</td>
             <td>${task.category}</td>
@@ -168,11 +176,19 @@ function DetailsShow(taskId) {
   })
     .then((response) => response.json())
     .then((task) => {
+      const formattedDueDate = new Date(task.dueDate).toLocaleDateString(
+        "en-GB",
+        {
+          day: "numeric",
+          month: "numeric",
+          year: "numeric",
+        }
+      );
       const taskDetailsContent = document.getElementById("taskDetailsContent");
       taskDetailsContent.innerHTML = `
                   <p><strong>Title:</strong> ${task.title}</p>
                   <p><strong>Description:</strong> ${task.description}</p>
-                  <p><strong>Due Date:</strong> ${task.dueDate}</p>
+                  <p><strong>Due Date:</strong> ${formattedDueDate}</p>
                   <p><strong>Priority:</strong> ${mapPriorityValueToLabel(task.priority)}</p>
                   <p><strong>Category:</strong> ${task.category}</p>
                   <p><strong>Status:</strong> ${task.status}</p>

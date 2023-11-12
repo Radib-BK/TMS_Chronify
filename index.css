@@ -67,12 +67,12 @@ input:hover, select:hover {
 
 table {
     display:flexbox;
-    align-items: center;
     text-align: center;
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
     overflow-x: auto;
+    margin: auto;
+    margin-top: 1rem;
 }
 
 thead {
@@ -84,7 +84,7 @@ th, td {
     vertical-align: middle;
     padding: 12px;
     border-bottom: 1px solid #000000;
-    min-width: auto;
+    width: 5%; 
     font-size: medium;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
@@ -236,11 +236,11 @@ button:hover {
 }
 
 /* Add this CSS for the Action column */
-/* td.action-column {
+td.action-column {
     text-align: center;
     min-width: 18.5rem;
     max-width: 18.5rem;
-} */
+}
 
 #watermark{
     position: fixed;
@@ -252,11 +252,12 @@ button:hover {
 }
 
 #table-container {
-    display: flex;
+    display: block;
     justify-content: center;
-    text-align: center;
-    align-items: center;
+    margin: auto;
+    width: 100%;
 }
+
 
 
 select {
@@ -379,9 +380,9 @@ select {
     
     button {
         margin: 0.2rem 0.1rem;
-        font-size: 12px;
-        padding: 8px 14px; /* More padding */
-        min-width: 6rem;
+        font-size: 11px;
+        padding: 7px 12px; /* More padding */
+        min-width: 5rem;
     }
     
     /* Adjust table layout for small screens */

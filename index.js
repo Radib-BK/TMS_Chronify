@@ -15,7 +15,6 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname));
 
-
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(process.env.MONGO_URI);
@@ -24,7 +23,7 @@ const connectDB = async () => {
     console.log(error);
     process.exit(1);
   }
-}
+};
 
 const userSchema = new mongoose.Schema({
   username: String,
@@ -32,21 +31,34 @@ const userSchema = new mongoose.Schema({
 });
 
 const taskSchema = new mongoose.Schema({
-    title: String,
-    description: String,
-    dueDate: Date,
-    priority: Number,
-    category: String,
-    status: { type: String, default: "pending" },
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      required: true,
-    },
-  });
+  title: String,
+  description: String,
+  dueDate: Date,
+  priority: Number,
+  category: String,
+  status: { type: String, default: 'pending' },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+});
 
-const Task = mongoose.model("Task", taskSchema);
-const User = mongoose.model("User", userSchema);
+userSchema.pre('remove', async function (next) {
+  try {
+    // Import the mongoose model directly to ensure it's available
+    const Task = mongoose.model('Task');
+    await Task.deleteMany({ user: this._id });
+    next();
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+const Task = mongoose.model('Task', taskSchema);
+const User = mongoose.model('User', userSchema);
+
 
 app.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "login.html"));
