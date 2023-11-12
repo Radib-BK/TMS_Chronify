@@ -31,6 +31,10 @@ h1 {
     max-width: 45%; /* Adjust the max-width based on your preference /* Add some margin between the sub-info sections */
 }
 
+strong {
+    color: rgb(6, 0, 72);
+}
+
 label {
     display: block;
     margin: 10px 0 5px;

@@ -184,14 +184,15 @@ function DetailsShow(taskId) {
           year: "numeric",
         }
       );
+      const due = calculateRemainingDays(task.dueDate);
       const taskDetailsContent = document.getElementById("taskDetailsContent");
       taskDetailsContent.innerHTML = `
-                  <p><strong>Title:</strong> ${task.title}</p>
-                  <p><strong>Description:</strong> ${task.description}</p>
-                  <p><strong>Due Date:</strong> ${formattedDueDate}</p>
-                  <p><strong>Priority:</strong> ${mapPriorityValueToLabel(task.priority)}</p>
-                  <p><strong>Category:</strong> ${task.category}</p>
-                  <p><strong>Status:</strong> ${task.status}</p>
+                  <p><strong>Title&emsp;&emsp;&emsp;&emsp;: </strong> ${task.title}</p>
+                  <p><strong>Description&ensp;: </strong> ${task.description}</p>
+                  <p><strong>Due&ensp;Date&emsp;&ensp;: </strong> ${formattedDueDate} (${due} days)</p>
+                  <p><strong>Priority&emsp;&emsp;&ensp;: </strong> ${mapPriorityValueToLabel(task.priority)}</p>
+                  <p><strong>Status&emsp;&emsp;&emsp;: </strong> ${task.status}</p>
+                  <p><strong>Category&ensp;&emsp;: </strong> ${task.category}</p>
                   <center>
                   <button onclick="EditTask('${task._id}')">Edit</button>
                   <button onclick="ChangeToCompleted('${task._id}')">Complete</button>
