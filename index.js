@@ -263,6 +263,10 @@ app.get("/", verifyToken, (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
+app.get('/reset-password', (req, res) => {
+  res.sendFile(path.join(__dirname, 'reset-password.html'));
+});
+
 app.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "login.html"));
 });
