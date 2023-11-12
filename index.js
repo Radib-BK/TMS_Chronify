@@ -6,6 +6,8 @@ const mongoose = require("mongoose");
 const path = require("path");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
+const randomstring = require("randomstring");
 
 const app = express();
 const PORT = 3000;
@@ -28,6 +30,9 @@ const connectDB = async () => {
 const userSchema = new mongoose.Schema({
   username: String,
   password: String,
+  email: String,
+  resetPasswordToken: String,
+  resetPasswordExpires: Date,
 });
 
 const taskSchema = new mongoose.Schema({
@@ -42,6 +47,17 @@ const taskSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
+});
+
+userSchema.pre('save', function (next) {
+  // Only proceed if the password is modified or this is a new user
+  if (!this.isModified('password') && !this.isNew) {
+    return next();
+  }
+
+  this.resetPasswordToken = undefined;
+  this.resetPasswordExpires = undefined;
+  next();
 });
 
 userSchema.pre('remove', async function (next) {
@@ -60,6 +76,89 @@ const Task = mongoose.model('Task', taskSchema);
 const User = mongoose.model('User', userSchema);
 
 
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USERNAME,
+    pass: process.env.EMAIL_PASSWORD,
+  },
+});
+
+// Route to request a password reset
+app.post("/forgot-password", async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    // Find the user by email
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+
+    // Generate a random token for password reset
+    const resetToken = randomstring.generate();
+
+    // Save the token and expiration date to the user document
+    user.resetPasswordToken = resetToken;
+    user.resetPasswordExpires = Date.now() + 3600000; // Token expires in 1 hour
+    await user.save();
+
+    // Send the reset password email
+    const resetLink = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/reset-password?token=${resetToken}`;
+    const mailOptions = {
+      from: process.env.EMAIL_USERNAME,
+      to: email,
+      subject: "Password Reset For ChroniFy",
+      html: `
+        <html>
+          <head></head>
+          <body>
+            <p>Click <a href="${resetLink}">here</a> to reset your password.</p>
+          </body>
+        </html>
+      `,
+    };
+
+    await transporter.sendMail(mailOptions);
+
+    res.status(200).send("Password reset email sent");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+// Route to reset password with the provided token
+app.post("/reset-password", async (req, res) => {
+  try {
+    const { token, newPassword } = req.body;
+
+    // Find the user by the reset token
+    const user = await User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      return res.status(400).send("Invalid or expired reset token");
+    }
+
+    // Update the password
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedPassword;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+    await user.save();
+
+    res.status(200).send("Password reset successfully");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+
 app.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "login.html"));
 });
@@ -68,13 +167,17 @@ app.get("/login", (req, res) => {
 // Register route
 app.post("/register", async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { username, email, password } = req.body;
 
     // Check if username already exists
     const existingUser = await User.findOne({ username });
+    const existingEmail = await User.findOne({ email });
 
     if (existingUser) {
       return res.status(409).send("Username already exists");
+    }
+    if (existingEmail) {
+      return res.status(409).send("Email already registered");
     }
 
     // Hash the password
@@ -84,6 +187,7 @@ app.post("/register", async (req, res) => {
     const newUser = new User({
       username,
       password: hashedPassword,
+      email,
     });
     
     console.log("New User:", newUser);
