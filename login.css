@@ -10,7 +10,7 @@ body {
   height: 100vh;
   background: linear-gradient(to bottom, #f9f8ff, #f8f4ff);
   touch-action: none;
-  user-select: none;
+  user-select: text;
 }
 
 

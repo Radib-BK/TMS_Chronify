@@ -139,8 +139,8 @@ select {
 
 @media only screen and (max-width: 600px) {
     body{
-        touch-action: none;
-        user-select: none;
+        touch-action:pan-y;
+        user-select: text;
     }
     
     form {
