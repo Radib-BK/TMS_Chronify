@@ -426,8 +426,8 @@ select {
 
     /* Add this CSS for the Action column */
     td.action-column {
-        max-width: 13rem;
-        min-width: 13rem;
+        max-width: 11.5rem;
+        min-width: 11.5rem;
     }
 
     center {
@@ -454,7 +454,7 @@ select {
     }
 
     td.desc-data {
-        min-width: 11rem;
+        min-width: 10.5rem;
     }
 
     input[type="date"]
