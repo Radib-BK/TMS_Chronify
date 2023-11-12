@@ -1,9 +1,3 @@
-if (window.innerWidth < 768) {
-  document.addEventListener('gesturestart', function (e) {
-      e.preventDefault();
-  });
-}
-
 document.addEventListener("DOMContentLoaded", async () => {
   const token = localStorage.getItem("token");
   if (!token) {
