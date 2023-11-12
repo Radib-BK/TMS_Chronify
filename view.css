@@ -10,7 +10,7 @@ h1 {
     text-align: center;
     color: rgb(3, 0, 158);
     font-weight: 700;
-    padding-top: 0rem;
+    padding-top: 1rem;
     margin-bottom: 0rem;
 }
 
@@ -18,7 +18,7 @@ h1 {
 #userinfo {
     font-family:'Courier New', Courier, monospace;
     text-align: center;
-    margin-top: 2px;
+    margin-top: 10px;
 }
 
 
@@ -42,7 +42,7 @@ textarea,
 select {
     width: calc(100% - 24px); /* Adjusted to consider padding */
     padding: 12px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: #ecf0f1;
@@ -60,11 +60,11 @@ textarea:hover, input:hover, select:hover {
 }
 
 button {
-    background-color: #40ff39;
-    box-shadow: 2px 3px 1px rgb(255, 250, 92);
+    background-color: #7bff52bc;
+    /* box-shadow: 2px 2px 1px rgba(89, 0, 255, 0.675); */
     color:#00152a;
     margin: auto;
-    margin-top: 1.5rem;
+    margin-top: 1.2rem;
     min-width: 10rem;
     padding: 10px 16px;
     border:#000000 solid 2px;
@@ -75,7 +75,8 @@ button {
 }
 
 button:hover {
-    background-color: rgb(0, 218, 33);
+    background-color: rgb(0, 255, 38);
+    transition: background-color 0.3s ease;
 }
 
 select{
@@ -83,12 +84,12 @@ select{
 }
 
 #nextButton {
-    background-color: rgb(52, 52, 219);
+    background-color: rgba(222, 132, 255, 0.575);
     border:#00152a solid 2px;
-    color: #fff;
-    box-shadow: 2px 3px 1px rgba(218, 117, 255, 0.575);
+    color: rgb(2, 0, 72);
+    /* box-shadow: 2px 2px 1px rgba(218, 117, 255, 0.575); */
     margin: auto;
-    margin-top: 1.5rem;
+    margin-top: 1.2rem;
     padding: 10px 16px;
     border-radius: 10px;
     cursor: pointer;
@@ -96,7 +97,9 @@ select{
 }
 
 #nextButton:hover {
-    background-color: #001f7a;
+    transition: background-color 0.3s ease;
+    background-color: #020090c6;
+    color: #ffffff;
 }
 
 select {
@@ -150,27 +153,17 @@ select {
     button,
     #nextButton {
         font-size: 14px;
-        margin: 0.5rem;
-        min-width: 9rem;
+        margin: 0.8rem 0rem;
+        min-width: 8rem;
     }
 
-    #userinfo::before,
-    #userinfo::after {
-    content: '';
-    display: block;
-    height: 1px;
-    width: 92%;
-    background-color: rgb(220, 217, 255); /* Light blue underline */
-    margin: 15px auto;
+    button{
+        margin-left: 2rem;
+    }
+    #nextButton{
+        margin-right: 2rem;
     }
 
-    #userinfo::before {
-    margin-right: 10px;
-    }
-
-    #userinfo::after {
-    margin-left: 20px;
-    }
 }
 
 @media only screen and (max-width: 450px) {
@@ -181,6 +174,6 @@ select {
     h1{
         padding-top: 2rem;
         padding-bottom: 0;
-        margin-bottom: 0;
+        margin-bottom: 1rem;
     }
 }

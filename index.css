@@ -3,7 +3,7 @@ body {
     background: linear-gradient(to bottom, #f9f8ff, #f8f4ff);
     color: #333;
     margin: 0rem 1rem 1rem;
-    padding: 1rem;
+    padding: 0.5rem 1rem 1rem;
 }
 
 #info {
@@ -14,11 +14,13 @@ body {
 }
 
 h1 {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 3.4rem;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     text-align: center;
     color: rgb(76, 0, 207);
     font-weight: 900;
-    font-size: 3rem;
 }
 
 .infoSubContainer {
@@ -39,7 +41,7 @@ label {
     display: block;
     margin: 10px 0 5px;
     color: #00133d;
-    font-size: large;
+    font-size: medium;
     font-weight: bold;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
@@ -222,17 +224,26 @@ tbody{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.warning-task {
+    background-color: #ff3c3c21;
+    color: #000;
+    transition: background-color 1.3s, color 1.3s;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
 
 button {
     background-color: #ff7f50;
     color: #fff;
     min-width: 7rem;
     margin: 0.2rem 1rem;
-    padding: 10px 16px; /* More padding */
+    padding: 9px 14px; /* More padding */
     border:#000000 solid 0px;
     box-shadow: 2px 2px 1px rgb(255, 0, 0);
     border-radius: 10px;
     cursor: pointer;
+    font-size: small;
     font-weight: 600;
 }
 
@@ -320,7 +331,9 @@ select {
     }
 
     h1{
-        margin-bottom: 0.2rem;
+        margin-top: 1.2rem;
+        font-size: 2.7rem;
+        margin-bottom: 0.15rem;
     }
 
     #noTask > h2{
@@ -371,7 +384,7 @@ select {
     input,
     select {
         min-width: 7rem;
-        font-size: 12px;
+        font-size: 11px;
         max-width: 16rem;
         margin-bottom: 0px;
     }

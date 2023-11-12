@@ -137,13 +137,18 @@ function DisplayTheTasks(tasks) {
         year: "numeric",
       }
     );
-    const remainingDays = calculateRemainingDays(task.dueDate);
+    var remainingDays = calculateRemainingDays(task.dueDate) + " day(s)";
     var statusIcon;
     var statusButton;
     const row = document.createElement("tr");
+    if (calculateRemainingDays(task.dueDate) <= 0 && task.status !== "completed") {
+      row.classList.add("warning-task");
+    }
     if (task.status === "completed") {
       statusIcon = "<img width='36' height='36' src='https://img.icons8.com/color/48/checked-checkbox.png' alt='checked-checkbox'/>"
       statusButton = "Not Done"
+      remainingDays = "";
+      row.classList.remove("warning-task");
       row.classList.add("completed-task");
     }
     else
@@ -154,7 +159,7 @@ function DisplayTheTasks(tasks) {
     row.innerHTML = `
             <td>${task.title}</td>
             <td>${task.description}</td>
-            <td>${formattedDueDate}<br>${remainingDays} day(s)</td>
+            <td>${formattedDueDate}<br>${remainingDays}</td>
             <td>${statusIcon}</td>
             <td>${mapPriorityValueToLabel(task.priority)}</td>
             <td>${task.category}</td>

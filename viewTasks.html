@@ -81,7 +81,7 @@
                     },
                 }).then(response => response.json());        
                 // Handle the user information
-                document.getElementById('userinfo').innerHTML = userInfo.username;
+                document.getElementById('userinfo').innerHTML ="User - "+userInfo.username;
                 console.log(userInfo);
             } catch (error) {
                 console.error('User information fetch error:', error);
