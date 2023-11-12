@@ -73,6 +73,7 @@ table {
     overflow-x: auto;
     margin: auto;
     margin-top: 1rem;
+    border-radius: 5px;
 }
 
 thead {
