@@ -95,7 +95,7 @@ function calculateRemainingDays(dueDate) {
   const due = new Date(dueDate);
   const timeDiff = due - now;
   const daysRemaining = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-  return daysRemaining + 1;
+  return daysRemaining;
 }
 
 function mapPriorityValueToLabel(value) {
