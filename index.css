@@ -453,8 +453,8 @@ select {
         width: calc(33.33% - 10px);
     }
 
-    .desc-data{
-        min-width: 5rem;
+    td.desc-data {
+        min-width: 11rem;
     }
 
     input[type="date"]
