@@ -454,7 +454,7 @@ select {
     }
 
     .desc-data{
-        min-width: 8.5rem;
+        min-width: 7rem;
     }
 
     input[type="date"]

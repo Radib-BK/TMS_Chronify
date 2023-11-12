@@ -172,7 +172,7 @@ select {
         font-size: 12px; /* Further adjust font size for even smaller screens */
     }
     h1{
-        padding-top: 2rem;
+        padding-top: 0.5rem;
         padding-bottom: 0;
         margin-bottom: 1rem;
     }
