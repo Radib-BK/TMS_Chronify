@@ -379,10 +379,11 @@ select {
     
     
     button {
-        margin: 0.2rem 0.1rem;
+        margin: 0.3rem 0.2rem;
         font-size: 11px;
         padding: 7px 12px; /* More padding */
         min-width: 5rem;
+        border-radius: 5px;
     }
     
     /* Adjust table layout for small screens */
@@ -420,7 +421,7 @@ select {
 
     input {
         max-width: 100%;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
     }
 
     .infoSubContainer > .infoSub {
