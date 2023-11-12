@@ -9,6 +9,8 @@ body {
   align-items: center;
   height: 100vh;
   background: linear-gradient(to bottom, #f9f8ff, #f8f4ff);
+  touch-action: manipulation;
+  user-select: none;
 }
 
 
@@ -16,7 +18,7 @@ body {
   text-align: center;
   background-color: rgba(226, 197, 255, 0.118);
   border-radius: 0.5rem;
-  padding: .1rem;
+  padding: 1px 0px 10px;
 }
 
 h1 ~ p{
@@ -31,24 +33,54 @@ center {
   max-width: 450px;
   text-align: center;
 }
+
 .container {
   background-color: #fff;
-  padding: 20px;
+  padding: 0px 20px 10px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    text-align: center;
-    color: rgb(76, 0, 207);
-    font-weight: 900;
-    font-size: 3rem;
-    display:block;
-}
+
 h2 {
-  color: rgb(6, 0, 76);
+    color: rgb(76, 0, 207);
+  }
+  
+/* Keyframes for animations */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
+
+/* Styling for h2 tags */
+h1 {
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 3rem;
+  font-weight: 900;
+  color: #fefdff;
+  margin-bottom: 0px;
+  position: relative;
+  display: block;
+  background: linear-gradient(45deg, rgba(13, 0, 255, 0.556),rgba(174, 46, 229, 0.448));
+  background-size: 200% 200%;
+  animation: gradientAnimation 5s ease infinite;
+  padding: 8px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+h1:hover {
+  color: rgb(255, 244, 255);
+  transition: color 0.3s ease;
+}
+
 form {
   background-color: #ffffff;
   padding: 30px;
@@ -81,7 +113,7 @@ input:hover, select:hover {
 }
 
 button {
-  background-color: rgb(31, 0, 132);
+  background-color: rgba(31, 0, 132, 0.829);
   box-shadow: 2px 2px 1px rgb(165, 219, 255);
   color: rgb(255, 253, 118);
   padding: 7px 12px;
@@ -116,3 +148,36 @@ a {
 .link-container a {
   margin: 0 10px;
 }
+
+#loginForm,
+#registerForm {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease;
+  transform-origin: center;
+}
+
+#registerForm > form {
+  background-color: rgb(254, 251, 255);
+}
+
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.8);
+  pointer-events: none;
+}
+
+.fade-in-out {
+  animation: fadeInOut 0.5s ease;
+}
+
+@keyframes fadeInOut {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+

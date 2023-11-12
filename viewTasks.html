@@ -62,7 +62,12 @@
         </div>
     </form>
     <br>
-    <script>       
+    <script>  
+        if (window.innerWidth < 768) {
+            document.addEventListener('gesturestart', function (e) {
+                e.preventDefault();
+            });
+        }     
         var userInfo = {};
         window.onload = async function () {
             const token = localStorage.getItem("token");

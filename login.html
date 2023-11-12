@@ -35,7 +35,7 @@
                 <p>Time Management System</p>
             </div>
             <div id="loginForm">
-                <h2>Welcome Back!</h2>
+                <h2>Welcome Back !</h2>
                 <form id="loginForm" onsubmit="login(event)">
                     <label for="loginUsername">Username</label>
                     <input type="text" id="loginUsername" name="username" 
@@ -70,11 +70,35 @@
         </center>
 
         <script>
-            
-            function toggleForm(formId) {
-                document.getElementById('loginForm').classList.toggle('hidden', formId !== 'loginForm');
-                document.getElementById('registerForm').classList.toggle('hidden', formId !== 'registerForm');
+            if (window.innerWidth < 768) {
+                document.addEventListener('gesturestart', function (e) {
+                    e.preventDefault();
+                });
             }
+
+            function toggleForm(formId) {
+                var loginForm = document.getElementById('loginForm');
+                var registerForm = document.getElementById('registerForm');
+            
+                if (formId === 'loginForm') {
+                    registerForm.classList.add('hidden', 'fade-in-out');
+                    loginForm.classList.remove('hidden');
+                    // Add a small delay to trigger the fade-in-out animation
+                    setTimeout(() => {
+                    registerForm.classList.add('fade-in-out');
+                    loginForm.classList.add('fade-in-out');
+                }, 10);
+            } else {
+                    loginForm.classList.add('hidden', 'fade-in-out');
+                    registerForm.classList.remove('hidden');
+                    // Add a small delay to trigger the fade-in-out animation
+                    setTimeout(() => {
+                        registerForm.classList.add('fade-in-out');
+                        loginForm.classList.add('fade-in-out');
+                    }, 10);
+                }
+            }
+            
         
             function login(event) {
                 event.preventDefault();
@@ -142,7 +166,7 @@
                 .then(data => {
                     alert('Registration successful. Please login.');
                     console.log('Registration successful:', data);
-                    // Handle successful registration, e.g., show a success message
+                    window.location.reload();
                 })
                 .catch(error => {
                     console.error('Registration error:', error);

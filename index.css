@@ -304,6 +304,11 @@ select {
 
 
 @media only screen and (max-width: 900px) {
+    body{
+        touch-action: manipulation;
+        user-select: none;
+    }
+
     h1{
         margin-bottom: 0.2rem;
     }

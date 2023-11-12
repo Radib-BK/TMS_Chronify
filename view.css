@@ -137,6 +137,11 @@ select {
 }
 
 @media only screen and (max-width: 600px) {
+    body{
+        touch-action: manipulation;
+        user-select: none;
+    }
+    
     form {
         padding: 20px;
     }
