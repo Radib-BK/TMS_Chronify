@@ -9,7 +9,7 @@ body {
   align-items: center;
   height: 100vh;
   background: linear-gradient(to bottom, #f9f8ff, #f8f4ff);
-  touch-action: manipulation;
+  touch-action: none;
   user-select: none;
 }
 
@@ -178,6 +178,20 @@ a {
   }
   to {
     opacity: 1;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  #header {
+    width: 100%;
+    position: absolute;
+    margin-top: 0;
+    padding-top: 0;
+    top: 5%;
+  }
+  h1{
+    margin-left: 6%;
+    margin-right: 6%;
   }
 }
 

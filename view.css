@@ -2,7 +2,7 @@ body {
     font-family: 'Arial', sans-serif;
     background: linear-gradient(to bottom, #f9f8ff, #f8f4ff);
     color: #333;
-    margin: 10px;
+    margin: 0px;
     padding: 0px;
 }
 
@@ -11,6 +11,7 @@ h1 {
     color: rgb(3, 0, 158);
     font-weight: 700;
     padding-top: 0rem;
+    margin-bottom: 0rem;
 }
 
 
@@ -138,7 +139,7 @@ select {
 
 @media only screen and (max-width: 600px) {
     body{
-        touch-action: manipulation;
+        touch-action: none;
         user-select: none;
     }
     
@@ -179,5 +180,7 @@ select {
     }
     h1{
         padding-top: 2rem;
+        padding-bottom: 0;
+        margin-bottom: 0;
     }
 }
