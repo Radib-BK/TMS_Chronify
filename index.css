@@ -122,7 +122,6 @@ tbody{
 }
 
 .modal {
-    touch-action: auto;
     z-index: 99;
     display: none;
     position: fixed;
@@ -134,7 +133,6 @@ tbody{
 }
 
 .modal-content {
-    touch-action: auto;
     z-index: 99;
     min-width: 35rem;
     position: absolute;
@@ -309,7 +307,7 @@ select {
 
 @media only screen and (max-width: 900px) {
     body{
-        touch-action: pan-y;
+        touch-action: auto;
         user-select: text;
         margin: 0rem 0.5rem;
         padding: 1rem 0.5rem;
