@@ -9,7 +9,7 @@ body {
   align-items: center;
   height: 100vh;
   background: linear-gradient(to bottom, #f9f8ff, #f8f4ff);
-  touch-action: none;
+  touch-action: pan-y;
   user-select: text;
 }
 
