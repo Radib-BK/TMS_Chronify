@@ -122,6 +122,7 @@ tbody{
 }
 
 .modal {
+    touch-action: auto;
     z-index: 99;
     display: none;
     position: fixed;
@@ -133,6 +134,7 @@ tbody{
 }
 
 .modal-content {
+    touch-action: auto;
     z-index: 99;
     min-width: 35rem;
     position: absolute;
@@ -309,6 +311,8 @@ select {
     body{
         touch-action: pan-y;
         user-select: text;
+        margin: 0rem 0.5rem;
+        padding: 1rem 0.5rem;
     }
 
     h1{
@@ -317,10 +321,6 @@ select {
 
     #noTask > h2{
         margin-top: 25%;
-    }
-    body {
-        margin: 0rem 0.5rem;
-        padding: 1rem 0.5rem;
     }
     
     #noTaskImg{
