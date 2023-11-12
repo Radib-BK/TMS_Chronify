@@ -16,7 +16,7 @@ body {
 
 #header {
   text-align: center;
-  background-color: rgba(226, 197, 255, 0.118);
+  background-color: rgba(229, 203, 255, 0.13);
   border-radius: 0.5rem;
   padding: 1px 0px 10px;
 }
@@ -190,6 +190,22 @@ a {
     opacity: 1;
   }
 }
+
+a{
+  font-weight: 600;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  color: #ea00ff;
+}
+
+
 
 @media only screen and (max-width: 500px) {
   #header {
