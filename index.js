@@ -105,7 +105,7 @@ app.post("/forgot-password", async (req, res) => {
     await user.save();
 
     // Send the reset password email
-    const resetLink = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/reset-password?token=${resetToken}`;
+    const resetLink = `${process.env.FRONTEND_URL || 'http://localhost:3000' || 'chromify.site'}/reset-password?token=${resetToken}`;
     const mailOptions = {
       from: process.env.EMAIL_USERNAME,
       to: email,
@@ -202,10 +202,10 @@ app.post("/register", async (req, res) => {
 // Login route
 app.post("/login", async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
     // Find the user by username
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ email });
 
     if (!user) {
       return res.status(401).send("Invalid username or password");

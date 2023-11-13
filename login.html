@@ -36,8 +36,8 @@
             </div>
             <div id="loginForm">
                 <form id="loginForm" onsubmit="login(event)">
-                    <label for="loginUsername">Username</label>
-                    <input type="text" id="loginUsername" name="username" 
+                    <label for="loginUsername">E-mail</label>
+                    <input type="email" id="loginUsername" name="username" 
                         required>
 
                     <label for="loginPassword">Password</label>
@@ -127,7 +127,7 @@
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        username: username,
+                        email: username,
                         password: password,
                     }),
                 })
