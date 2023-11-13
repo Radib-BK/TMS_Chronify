@@ -60,6 +60,11 @@ select {
     background-color: rgba(242, 240, 255, 0.471);
 }
 
+textarea{
+    resize:none;
+    height: 3rem;
+}
+
 select {
     width: 75%;
 }
@@ -396,12 +401,27 @@ select {
         font-size: 14px;
     }
     
+    textarea,
     input,
     select {
         min-width: 7rem;
         font-size: 11px;
         max-width: 16rem;
         margin-bottom: 0px;
+    }
+    .modal-content select{
+        max-width: 78%;
+        width: 100%;
+        appearance: none;
+        -webkit-appearance: none;
+        padding: 8px 6px;
+        font-size: 14px;
+        border-radius: 5px;
+        color: #000000;
+        outline: none;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+        margin-bottom: 1rem;
     }
     
     .modal-content {

@@ -50,13 +50,15 @@ select {
     transition: border-color 0.3s ease;
 }
 
-select {
-    max-width: 100%;
-}
 
 textarea:hover, input:hover, select:hover {
     background-color: #fbf8ff;
     border-color: rgb(52, 52, 219);
+}
+
+textarea{
+    resize: none;
+    height: 2rem;
 }
 
 button {
@@ -79,9 +81,6 @@ button:hover {
     transition: background-color 0.3s ease;
 }
 
-select{
-    width: 100%;
-}
 
 #nextButton {
     background-color: rgba(222, 132, 255, 0.575);
@@ -103,6 +102,8 @@ select{
 }
 
 select {
+    max-width: 100%;
+    width: 100%;
     appearance: none;
     -webkit-appearance: none;
     padding: 8px 6px;
@@ -112,8 +113,8 @@ select {
     outline: none;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
-  }
-  
+}
+
   select option {
     background-color: #ffffff;
     color: #000000;
