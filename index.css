@@ -225,7 +225,7 @@ tbody{
 }
 
 .warning-task {
-    background-color: #ffaa0028;
+    background-color: #ffe62a1c;
     color: #000;
     transition: background-color 1.3s, color 1.3s;
     border-radius: 8px;

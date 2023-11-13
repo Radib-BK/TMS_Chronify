@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", async () => {
   const token = localStorage.getItem("token");
   if (!token) {
@@ -93,7 +92,7 @@ function GoBack() {
 
 function calculateRemainingDays(dueDate, timeZone) {
   const now = moment().tz(timeZone).startOf('day');
-  const due = moment.tz(dueDate, 'YYYY-MM-DD', timeZone).startOf('day');
+  const due = moment.utc(dueDate, 'YYYY-MM-DDTHH:mm:ss.SSSZ').startOf('day');
   const daysRemaining = due.diff(now, 'days');
   return daysRemaining;
 }
@@ -126,9 +125,10 @@ function DisplayTheTasks(tasks) {
   }
   const viewTasks = document.getElementById("viewTasks");
   viewTasks.innerHTML = "";
-
+  
   tasks.forEach((task) => {
     // Format the dueDate to a string with "dd-mm-yyyy" format
+    console.log(task.dueDate);
     const formattedDueDate = new Date(task.dueDate).toLocaleDateString(
       "en-GB",
       {
@@ -136,17 +136,17 @@ function DisplayTheTasks(tasks) {
         month: "numeric",
         year: "numeric",
       }
-    );
-    var remainingDays = calculateRemainingDays(task.dueDate, 'Asia/Dhaka') + " day(s)";
-    var statusIcon;
-    var statusButton;
-    const row = document.createElement("tr");
-    if (calculateRemainingDays(task.dueDate, 'Asia/Dhaka') == 0 && task.status !== "completed") {
-      row.classList.add("warning-task");
-    }
-    if (calculateRemainingDays(task.dueDate, 'Asia/Dhaka') < 0 && task.status !== "completed") {
-      row.classList.add("missing-task");
-    }
+      );
+      var remainingDays = calculateRemainingDays(task.dueDate, 'Asia/Dhaka') + " day(s)";
+      var statusIcon;
+      var statusButton;
+      const row = document.createElement("tr");
+      if (calculateRemainingDays(task.dueDate, 'Asia/Dhaka') == 0 && task.status !== "completed") {
+        row.classList.add("warning-task");
+      }
+      if (calculateRemainingDays(task.dueDate, 'Asia/Dhaka') < 0 && task.status !== "completed") {
+        row.classList.add("missing-task");
+      }
     if (task.status === "completed") {
       statusIcon = "<img width='34' height='34' src='https://img.icons8.com/color/48/checked-checkbox.png' alt='checked-checkbox'/>"
       statusButton = "Not Done"
@@ -164,130 +164,131 @@ function DisplayTheTasks(tasks) {
       }
     }
     row.innerHTML = `
-            <td>${task.title}</td>
-            <td class="desc-data">${task.description}</td>
-            <td>${formattedDueDate}<br>${remainingDays}</td>
-            <td>${statusIcon}</td>
-            <td>${mapPriorityValueToLabel(task.priority)}</td>
-            <td>${task.category}</td>
-            <td class="action-column">
-            <button onclick="ChangeToCompleted('${task._id}')">${statusButton}</button>
-                <button onclick="DetailsShow('${task._id}')">Details</button>
-                <button onclick="EditTask('${task._id}')">Edit</button>
-                <button onclick="RemoveTasks('${task._id}')">Delete</button>
-            </td>
-        `;
+    <td>${task.title}</td>
+    <td class="desc-data">${task.description}</td>
+    <td>${formattedDueDate}<br>${remainingDays}</td>
+    <td>${statusIcon}</td>
+    <td>${mapPriorityValueToLabel(task.priority)}</td>
+    <td>${task.category}</td>
+    <td class="action-column">
+    <button onclick="ChangeToCompleted('${task._id}')">${statusButton}</button>
+    <button onclick="DetailsShow('${task._id}')">Details</button>
+    <button onclick="EditTask('${task._id}')">Edit</button>
+    <button onclick="RemoveTasks('${task._id}')">Delete</button>
+    </td>
+    `;
     viewTasks.appendChild(row);
   });
 }
 
 function DetailsShow(taskId) {
   const token = localStorage.getItem("token");
-
+  
   fetch(`/tasks/${taskId}`, {
     headers: {
       Authorization: `${token}`,
     },
   })
-    .then((response) => response.json())
-    .then((task) => {
-      const formattedDueDate = new Date(task.dueDate).toLocaleDateString(
-        "en-GB",
-        {
-          day: "numeric",
-          month: "numeric",
-          year: "numeric",
-        }
+  .then((response) => response.json())
+  .then((task) => {
+    const formattedDueDate = new Date(task.dueDate).toLocaleDateString(
+      "en-GB",
+      {
+        day: "numeric",
+        month: "numeric",
+        year: "numeric",
+      }
       );
-      const due = calculateRemainingDays(task.dueDate);
+      const due = calculateRemainingDays(task.dueDate, 'Asia/Dhaka');
       const taskDetailsContent = document.getElementById("taskDetailsContent");
       taskDetailsContent.innerHTML = `
-                  <p><strong>Title&emsp;&emsp;&emsp;&emsp;: </strong> ${task.title}</p>
-                  <p><strong>Description&ensp;: </strong> ${task.description}</p>
-                  <p><strong>Due&ensp;Date&emsp;&ensp;: </strong> ${formattedDueDate} (${due} days)</p>
-                  <p><strong>Priority&emsp;&emsp;&ensp;: </strong> ${mapPriorityValueToLabel(task.priority)}</p>
-                  <p><strong>Status&emsp;&emsp;&emsp;: </strong> ${task.status}</p>
-                  <p><strong>Category&ensp;&emsp;: </strong> ${task.category}</p>
-                  <center>
-                  <button onclick="EditTask('${task._id}')">Edit</button>
-                  <button onclick="ChangeToCompleted('${task._id}')">Complete</button>
-                  <button onclick="RemoveTasks('${task._id}')">Delete</button>
-                  </center>
-              `;
+      <p><strong>Title&emsp;&emsp;&emsp;&emsp;: </strong> ${task.title}</p>
+      <p><strong>Description&ensp;: </strong> ${task.description}</p>
+      <p><strong>Due&ensp;Date&emsp;&ensp;: </strong> ${formattedDueDate} (${due} days)</p>
+      <p><strong>Priority&emsp;&emsp;&ensp;: </strong> ${mapPriorityValueToLabel(task.priority)}</p>
+      <p><strong>Status&emsp;&emsp;&emsp;: </strong> ${task.status}</p>
+      <p><strong>Category&ensp;&emsp;: </strong> ${task.category}</p>
+      <center>
+      <button onclick="EditTask('${task._id}')">Edit</button>
+      <button onclick="ChangeToCompleted('${task._id}')">Complete</button>
+      <button onclick="RemoveTasks('${task._id}')">Delete</button>
+      </center>
+      `;
       OpenDetailsWindow();
     })
     .catch((error) => console.error(error));
-}
-
-function OpenDetailsWindow() {
-  const taskDetailsModal = document.getElementById("taskDetailsModal");
-  taskDetailsModal.style.display = "block";
-}
-
-function CloseDetailsWindow() {
-  const taskDetailsModal = document.getElementById("taskDetailsModal");
+  }
+  
+  function OpenDetailsWindow() {
+    const taskDetailsModal = document.getElementById("taskDetailsModal");
+    taskDetailsModal.style.display = "block";
+  }
+  
+  function CloseDetailsWindow() {
+    const taskDetailsModal = document.getElementById("taskDetailsModal");
   taskDetailsModal.style.display = "none";
 }
 
 function ChangeToCompleted(taskId) {
-    const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
   
-    fetch(`/tasks/${taskId}/complete`, {
-      method: "PUT",
-      headers: {
-        Authorization: `${token}`,
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          FetchToDisplayTheTasks();
-        } else {
-          console.error("Marking task as completed Failed");
-        }
-      })
-      .catch((error) => console.error(error));
-  }
-  
+  fetch(`/tasks/${taskId}/complete`, {
+    method: "PUT",
+    headers: {
+      Authorization: `${token}`,
+    },
+  })
+  .then((response) => {
+    if (response.ok) {
+      FetchToDisplayTheTasks();
+    } else {
+      console.error("Marking task as completed Failed");
+    }
+  })
+  .catch((error) => console.error(error));
+}
+
 
 function RemoveTasks(taskId) {
   const token = localStorage.getItem("token");
-
+  
   fetch(`/tasks/${taskId}`, {
     method: "DELETE",
     headers: {
       Authorization: `${token}`,
     },
   })
-    .then((response) => {
-      if (response.ok) {
-        FetchToDisplayTheTasks();
-        CloseDetailsWindow();
-      } else {
+  .then((response) => {
+    if (response.ok) {
+      FetchToDisplayTheTasks();
+      CloseDetailsWindow();
+    } else {
         console.error("Delete task Failed");
       }
     })
     .catch((error) => console.error(error));
-}
-
-let currentTaskId;
-
-function EditTask(taskId) {
-  const token = localStorage.getItem("token");
-
-  fetch(`/tasks/${taskId}`, {
-    headers: {
-      Authorization: `${token}`,
-    },
-  })
+  }
+  
+  let currentTaskId;
+  
+  function EditTask(taskId) {
+    const token = localStorage.getItem("token");
+    
+    fetch(`/tasks/${taskId}`, {
+      headers: {
+        Authorization: `${token}`,
+      },
+    })
     .then((response) => response.json())
     .then((task) => {
       currentTaskId = taskId;
       document.getElementById("editTitle").value = task.title;
       document.getElementById("editDescription").value = task.description;
-      document.getElementById("editDueDate").value = task.dueDate;
+      const dueDate = new Date(task.dueDate).toISOString().split('T')[0];
+      document.getElementById("editDueDate").value = dueDate;
       document.getElementById("editPriority").value = task.priority;
       document.getElementById("editCategory").value = task.category;
-
+      
       OpenEditWindow();
     })
     .catch((error) => console.error(error));
