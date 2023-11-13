@@ -225,7 +225,15 @@ tbody{
 }
 
 .warning-task {
-    background-color: #ff3c3c21;
+    background-color: #ffaa0028;
+    color: #000;
+    transition: background-color 1.3s, color 1.3s;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.missing-task {
+    background-color: #ff3c6328;
     color: #000;
     transition: background-color 1.3s, color 1.3s;
     border-radius: 8px;

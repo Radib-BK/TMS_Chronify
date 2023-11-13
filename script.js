@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", async () => {
   const token = localStorage.getItem("token");
   if (!token) {
@@ -90,11 +91,10 @@ function GoBack() {
   window.location.href = "/viewTasks";
 }
 
-function calculateRemainingDays(dueDate) {
-  const now = new Date();
-  const due = new Date(dueDate);
-  const timeDiff = due - now;
-  const daysRemaining = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+function calculateRemainingDays(dueDate, timeZone) {
+  const now = moment().tz(timeZone).startOf('day');
+  const due = moment.tz(dueDate, 'YYYY-MM-DD', timeZone).startOf('day');
+  const daysRemaining = due.diff(now, 'days');
   return daysRemaining;
 }
 
@@ -137,24 +137,31 @@ function DisplayTheTasks(tasks) {
         year: "numeric",
       }
     );
-    var remainingDays = calculateRemainingDays(task.dueDate) + " day(s)";
+    var remainingDays = calculateRemainingDays(task.dueDate, 'Asia/Dhaka') + " day(s)";
     var statusIcon;
     var statusButton;
     const row = document.createElement("tr");
-    if (calculateRemainingDays(task.dueDate) <= 0 && task.status !== "completed") {
+    if (calculateRemainingDays(task.dueDate, 'Asia/Dhaka') == 0 && task.status !== "completed") {
       row.classList.add("warning-task");
     }
+    if (calculateRemainingDays(task.dueDate, 'Asia/Dhaka') < 0 && task.status !== "completed") {
+      row.classList.add("missing-task");
+    }
     if (task.status === "completed") {
-      statusIcon = "<img width='36' height='36' src='https://img.icons8.com/color/48/checked-checkbox.png' alt='checked-checkbox'/>"
+      statusIcon = "<img width='34' height='34' src='https://img.icons8.com/color/48/checked-checkbox.png' alt='checked-checkbox'/>"
       statusButton = "Not Done"
       remainingDays = "";
       row.classList.remove("warning-task");
+      row.classList.remove("missing-task");
       row.classList.add("completed-task");
     }
     else
     {
       statusButton = "Complete"
-      statusIcon = "<img width='36' height='36' src='https://img.icons8.com/nolan/64/hourglass.png' alt='hourglass'/>"
+      statusIcon = "<img width='32' height='32' src='https://img.icons8.com/nolan/64/hourglass.png' alt='hourglass'/>"
+      if (calculateRemainingDays(task.dueDate, 'Asia/Dhaka') < 0) {
+        statusIcon = "<img width='32' height='32' src='https://img.icons8.com/officel/128/leave.png' alt='leave'/>"
+      }
     }
     row.innerHTML = `
             <td>${task.title}</td>
