@@ -481,8 +481,14 @@ select {
     
     th, td {
         min-width: 1rem;
-        font-size: small;
+        font-size: 13px;
         vertical-align: middle;
+        font-family: Tahoma, sans-serif;
+        font-weight: 500;
+    }
+
+    td:first-child {
+        font-weight: 600;
     }
 
     /* Add this CSS for the Action column */
@@ -515,7 +521,7 @@ select {
     }
 
     td.desc-data {
-        min-width: 9rem;
+        min-width: 8.5rem;
     }
 
     input[type="date"]
