@@ -221,6 +221,7 @@ tbody{
     height: 48px;
 }   
 
+
 .completed-task {
     background-color: #48ff4817;
     color: #000;
@@ -245,6 +246,27 @@ tbody{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.iconImg{
+    width: 32px;
+    height: 32px;
+}
+
+.iconBtn{
+    background-color: #fefdff;
+    color: #fff;
+    min-width: 3.5rem;
+    margin: 0.3rem .4rem;
+    padding: 7px 7px; /* More padding */
+    border:#000000 solid 0px;
+    box-shadow: 2px 2px 1px rgb(241, 158, 255);
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: small;
+}
+
+.iconBtn:hover {
+    background-color: #f6eaff;
+}
 
 button {
     background-color: #ff7f50;
@@ -267,12 +289,12 @@ button:hover {
 /* Add this CSS for the Action column */
 td.action-column {
     text-align: center;
-    min-width: 18.5rem;
-    max-width: 18.5rem;
+    min-width: 19rem;
+    max-width: 19rem;
 }
 
 td.desc-data {
-    min-width: 20rem;
+    min-width: 26rem;
 }
 
 #watermark{
@@ -324,20 +346,19 @@ select {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   }
 
-@media only screen and (max-width: 1140px) {
-    td.action-column {
-        text-align: center;
-        min-width: 18.5rem;
-        max-width: 18.5rem;
-    }
-    td.desc-data {
-        min-width: 8.5rem;
-    }
-}
 
-@media only screen and (max-width: 1067px) {
+
+@media only screen and (max-width: 1150px) {
     table{
         display: block;
+    }
+    td.action-column {
+        text-align: center;
+        min-width: 10.5rem;
+        max-width: 10.5rem;
+    }
+    td.desc-data {
+        min-width: 13.5rem;
     }
 }
 
@@ -430,6 +451,18 @@ select {
         padding: 20px;
     }
     
+    .iconImg{
+        width: 26px;
+        height: 26px;
+    }
+
+    .iconBtn{
+        margin: 0.2rem 0.2rem;
+        font-size: 11px;
+        padding: 6px 8px; /* More padding */
+        min-width: 2.8rem;
+        border-radius: 8px;
+    }
     
     button {
         margin: 0.2rem 0.2rem;
@@ -454,8 +487,8 @@ select {
 
     /* Add this CSS for the Action column */
     td.action-column {
-        max-width: 11.5rem;
-        min-width: 11.5rem;
+        max-width: 8rem;
+        min-width: 8rem;
     }
 
     center {
