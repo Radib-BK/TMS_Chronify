@@ -92,8 +92,12 @@ function GoBack() {
 
 function calculateRemainingDays(dueDate, timeZone) {
   const now = moment().tz(timeZone).startOf('day');
-  const due = moment.utc(dueDate, 'YYYY-MM-DDTHH:mm:ss.SSSZ').startOf('day');
-  const daysRemaining = due.diff(now, 'days');
+  const due = moment.utc(dueDate).tz(timeZone);
+
+  const nowDayOfYear = now.dayOfYear();
+  const dueDayOfYear = due.dayOfYear();
+
+  const daysRemaining = dueDayOfYear - nowDayOfYear;
   return daysRemaining;
 }
 
@@ -128,7 +132,6 @@ function DisplayTheTasks(tasks) {
   
   tasks.forEach((task) => {
     // Format the dueDate to a string with "dd-mm-yyyy" format
-    console.log(task.dueDate);
     const formattedDueDate = new Date(task.dueDate).toLocaleDateString(
       "en-GB",
       {
