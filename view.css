@@ -135,7 +135,7 @@ select {
 
   input[type="date"]
 {
-    display:inline-block;
+    display:block;
     -webkit-appearance: textfield;
     -moz-appearance: textfield;
 }
@@ -192,26 +192,17 @@ select {
     label{
         font-size: small;
     }
-    input,select{
+    input,select,textarea{
         font-size: small;
         margin-bottom: 1px;
     }
-    textarea{
-        margin-bottom: 1.6rem;
-    }
     input{
-        padding: 8px 11px;
+        padding: 8px 12px;
     }
     select{
         margin-bottom: 1rem;
     }
-    label {
-        display: inline-block; /* or use display: inline; */
-        margin-right: 10px; /* Adjust the margin as needed */
-    }
     input[type="date"] {
-        padding: 8px 12px;
-        width: 64%;
         display: inline-block; /* or use display: inline; */
     }
 }
