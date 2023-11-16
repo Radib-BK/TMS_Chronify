@@ -97,9 +97,10 @@ th, td {
     padding: 12px;
     border-bottom: 1px solid #000000;
     width: 5%; 
-    font-size: medium;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+    font-size:medium;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
 
 .noTask{
     text-align: center;
