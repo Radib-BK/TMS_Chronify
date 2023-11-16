@@ -83,10 +83,9 @@ button:hover {
 
 
 #nextButton {
-    background-color: rgba(222, 132, 255, 0.575);
-    border:#00152a solid 2px;
-    color: rgb(2, 0, 72);
-    /* box-shadow: 2px 2px 1px rgba(218, 117, 255, 0.575); */
+    background-color: rgb(0, 5, 136);
+    border:rgb(140, 0, 255) solid 2px;
+    color: rgb(255, 255, 255);
     margin: auto;
     margin-top: 1.2rem;
     padding: 10px 16px;
@@ -141,6 +140,13 @@ select {
     -moz-appearance: textfield;
 }
 
+#form-container {
+    max-width: 600px; /* Set a maximum width for larger screens */
+    margin: 0 auto; /* Center the form container */
+    padding: 0px 30px 30px;
+    box-sizing: border-box;
+}
+
 @media only screen and (max-width: 600px) {
     body{
         touch-action: auto;
@@ -155,7 +161,7 @@ select {
     #nextButton {
         font-size: 14px;
         margin: 0.8rem 0rem;
-        min-width: 8rem;
+        min-width: 6rem;
     }
 
     button{
@@ -170,11 +176,30 @@ select {
 @media only screen and (max-width: 450px) {
     button,
     #nextButton {
-        font-size: 12px; /* Further adjust font size for even smaller screens */
+        font-size: 10px; /* Further adjust font size for even smaller screens */
+        margin: 0.8rem 0.6rem 0.3rem; 
+        min-width: 7.2rem;
     }
     h1{
-        padding-top: 0.5rem;
+        padding-top: 3.5rem;
         padding-bottom: 0;
+        margin-bottom: 0.5rem;
+        font-size: 1.5rem;
+    }
+    h2{
+        font-size: large;
+    }
+    label{
+        font-size: small;
+    }
+    input,select,textarea{
+        font-size: small;
+        margin-bottom: 1px;
+    }
+    input{
+        padding: 8px 12px;
+    }
+    select{
         margin-bottom: 1rem;
     }
 }

@@ -38,8 +38,9 @@
 <body>
     <h1>CREATE NEW TASKS</h1>
     <h2 id="userinfo">Hello</h2>
-    <form onsubmit="createNewTask(event)" method="POST">
-        <label for="title">Title:</label>
+    <div id="form-container">
+        <form onsubmit="createNewTask(event)" method="POST">
+            <label for="title">Title:</label>
         <input type="text" id="title" name="title" required>
 
         <label for="description">Description:</label>
@@ -60,8 +61,8 @@
             <button type="submit">Create New Task</button>
             <button type="button" id="nextButton">View All Tasks</button>
         </div>
-    </form>
-    <br>
+        </form>
+    </div>
     <script>  
         
         var userInfo = {};
