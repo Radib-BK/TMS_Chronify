@@ -181,7 +181,7 @@ select {
         min-width: 7.2rem;
     }
     h1{
-        padding-top: 3.5rem;
+        padding-top: 2.5rem;
         padding-bottom: 0;
         margin-bottom: 0.5rem;
         font-size: 1.5rem;
@@ -201,5 +201,8 @@ select {
     }
     select{
         margin-bottom: 1rem;
+    }
+    input[type="date"] {
+        display: inline-block; /* or use display: inline; */
     }
 }
