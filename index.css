@@ -347,7 +347,12 @@ select {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   }
 
+#doneIcon:hover{
 
+}
+#delIcon:hover{
+    background-color: rgba(255, 42, 42, 0.177);
+}
 
 @media only screen and (max-width: 1150px) {
     table{
@@ -453,6 +458,7 @@ select {
     }
     
     .iconImg{
+        padding: 3px 2px 2px 3px;
         width: 26px;
         height: 26px;
     }
