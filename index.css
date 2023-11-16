@@ -515,7 +515,7 @@ select {
     }
 
     td.desc-data {
-        min-width: 10.5rem;
+        min-width: 9.5rem;
     }
 
     input[type="date"]
