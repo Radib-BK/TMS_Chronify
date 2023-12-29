@@ -1,4 +1,13 @@
-LIVE LINK - https://chronify-rbk.cyclic.app/login
+LIVE LINK - https://chromify.site/login
+Alternative LIVE LINK - https://chronify-rbk.cyclic.app/login
+
+
+Create a .env file:
+EMAIL_PASSWORD=zxgd meau fguj roao
+EMAIL_USERNAME=chronify.helper@gmail.com
+FRONTEND_URL=http://localhost:3000
+JWT_SECRET=1f30b710d5bfc3db54f0c32885159018366603181883edf5aac5410546c0806a
+MONGO_URI= (your mongoDB atlas link)
 
 If want to run locally-
 1. connect to your mongoDB in server.js
