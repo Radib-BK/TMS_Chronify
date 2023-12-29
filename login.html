@@ -140,7 +140,7 @@
                             return Promise.reject('Login failed');
                         });
                     }
-                    return response.json(); // Assuming your server sends JSON data upon successful login
+                    return response.json();
                 })
                 .then(data => {
                     console.log('Login successful:', data);
@@ -217,7 +217,6 @@
                     alert('Password reset failed. Please try again.');
                 });
             }
-            
         </script>
     </body>
 </html>

@@ -223,6 +223,7 @@ function DetailsShow(taskId) {
       <button onclick="RemoveTasks('${task._id}')">Delete</button>
       </center>
       `;
+      
       document.getElementById("statusBtn").addEventListener("click", function() {
         if (document.getElementById("statusBtn").innerHTML === "Complete") {
           document.getElementById("statusBtn").innerHTML = "Not Done";

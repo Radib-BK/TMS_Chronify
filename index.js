@@ -62,7 +62,6 @@ userSchema.pre("save", function (next) {
 
 userSchema.pre("remove", async function (next) {
   try {
-    // Import the mongoose model directly to ensure it's available
     const Task = mongoose.model("Task");
     await Task.deleteMany({ user: this._id });
     next();
@@ -210,7 +209,6 @@ app.post("/login", async (req, res) => {
       return res.status(401).send("Invalid username or password");
     }
 
-    // Check the password
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {

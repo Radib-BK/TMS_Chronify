@@ -1,5 +1,5 @@
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Arial', sans-serif, 'Courier New', Courier, monospace;
     background: linear-gradient(to bottom, #f9f8ff, #f8f4ff);
     color: #333;
     margin: 0rem 1rem 1rem;
@@ -30,7 +30,7 @@ h1 {
 
 .infoSub {
     flex: 1;
-    max-width: 45%; /* Adjust the max-width based on your preference /* Add some margin between the sub-info sections */
+    max-width: 45%;
 }
 
 strong {
@@ -348,9 +348,7 @@ select {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   }
 
-#doneIcon:hover{
 
-}
 #delIcon:hover{
     background-color: rgba(255, 42, 42, 0.177);
 }
